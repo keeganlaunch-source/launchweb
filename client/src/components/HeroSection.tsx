@@ -1,5 +1,6 @@
 import { Check, Smartphone, X } from "lucide-react";
 import { useState } from "react";
+import coachHeroImage from "@assets/coach-hero.jpg";
 import { trackAppDownload, trackCustomEvent } from "../lib/firebase";
 import { trackAppDownload as trackMetaAppDownload, trackViewContent } from "../lib/meta-pixel";
 
@@ -96,9 +97,9 @@ export default function HeroSection() {
         <div className="relative animate-slide-in">
           <div className="w-full h-96 lg:h-[600px] bg-muted relative overflow-hidden border border-border">
             <img
-              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-              alt="Person doing workout at home"
-              className="w-full h-full object-cover grayscale"
+              src={coachHeroImage}
+              alt="Coach Keegan, founder of Launch Lifestyle"
+              className="w-full h-full object-cover object-top"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
           </div>
