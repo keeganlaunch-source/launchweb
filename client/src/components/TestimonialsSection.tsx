@@ -58,38 +58,32 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section id="testimonials" className="py-20 px-4 lg:px-8 bg-muted">
+    <section id="testimonials" className="py-24 px-6 lg:px-12 bg-background">
       <div className="max-w-6xl mx-auto">
-        {/* Testimonials Header */}
         <div className="text-center mb-16">
-          <h2 className="font-grunge text-4xl lg:text-6xl uppercase tracking-tight mb-4">
-            Real <span className="text-primary">Results</span> From Real People
+          <h2 className="font-heading text-5xl lg:text-7xl uppercase tracking-tight">
+            What <span className="text-primary">Clients</span> Say
           </h2>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-background border-2 border-border p-8 relative">
-              <div className="absolute -top-4 left-6 bg-background px-2">
-                <span className="text-4xl text-primary font-black">"</span>
-              </div>
-              <p className="text-lg mb-6 font-medium pt-4">
+            <div key={index} className="bg-card border border-border p-8 flex flex-col justify-between">
+              <p className="text-base leading-relaxed text-foreground/85 mb-6">
                 {testimonial.content}
               </p>
-              
-              {/* Testimonial Author */}
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-muted rounded-full overflow-hidden">
-                  <img 
-                    src={testimonial.author.image} 
-                    alt={testimonial.author.name} 
+
+              <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <div className="w-10 h-10 bg-muted rounded-full overflow-hidden shrink-0">
+                  <img
+                    src={testimonial.author.image}
+                    alt={testimonial.author.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
-                  <h4 className="font-black uppercase text-sm">{testimonial.author.name}</h4>
-                  <p className="text-muted-foreground text-sm">{testimonial.author.detail}</p>
+                  <h4 className="font-medium text-sm">{testimonial.author.name}</h4>
+                  <p className="text-muted-foreground text-xs">{testimonial.author.detail}</p>
                 </div>
               </div>
             </div>

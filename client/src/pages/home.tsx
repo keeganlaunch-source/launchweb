@@ -8,10 +8,11 @@ import Footer from "@/components/Footer";
 import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import { LeadMagnets } from "@/components/LeadMagnets";
 import { TrustSignals } from "@/components/TrustSignals";
-import FreeTrialSection from "@/components/FreeTrialSection";
+import ServicesOverview from "@/components/ServicesOverview";
+import ServiceSections from "@/components/ServiceSections";
+import AppSection from "@/components/AppSection";
 import FloatingCTA from "@/components/FloatingCTA";
 import SEOEnhancer from "@/components/SEOEnhancer";
-import ExitIntentModal from "@/components/ExitIntentModal";
 import useScrollToTop from "@/hooks/useScrollToTop";
 import { ArrowUp } from "lucide-react";
 
@@ -22,33 +23,31 @@ export default function Home() {
     try {
       const response = await fetch('/api/lead-magnet', {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ 
-          email, 
+        body: JSON.stringify({
+          email,
           magnetType,
           source: 'launch_hub'
         }),
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const result = await response.json();
-      
+
       console.log(`Lead magnet ${magnetType} signup successful:`, result.message);
-      
-      // Show success message without alert popup to avoid interference
-      const successMessage = magnetType === 'consultation-draw' 
+
+      const successMessage = magnetType === 'consultation-draw'
         ? 'Successfully entered into consultation draw! Draw ends last day of the month.'
         : 'Your free resource has been sent to your email!';
-      
-      // Use a toast-style notification instead of alert
+
       console.log('SUCCESS:', successMessage);
-      
+
     } catch (error) {
       console.error('Lead magnet signup error:', error);
       console.log('ERROR: Something went wrong. Please try again.');
@@ -58,43 +57,49 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      
-      {/* 1. Get fit hook line */}
+
+      {/* Hero */}
       <HeroSection />
-      
-      {/* 2. 3 check boxes (trust signals) */}
+
+      {/* Trust signals */}
       <TrustSignals />
-      
-      {/* 3. Meet coach */}
-      <CoachSection />
-      
-      {/* 4. Testimonials */}
-      <TestimonialsSection />
-      
-      {/* 7-Day Free Trial CTA */}
-      <FreeTrialSection />
-      
-      {/* Key Features */}
+
+      {/* Services overview - jump-off point to every service */}
+      <ServicesOverview />
+
+      {/* Individual in-person service sections */}
+      <ServiceSections />
+
+      {/* What the app includes */}
       <FeaturesSection />
-      
-      {/* Lead magnets lower down */}
+
+      {/* The app - kept prominent per the existing signup/download flow */}
+      <AppSection />
+
+      {/* Meet the coach */}
+      <CoachSection />
+
+      {/* Testimonials */}
+      <TestimonialsSection />
+
+      {/* Free resources */}
       <LeadMagnets onEmailCapture={handleEmailCapture} />
 
       {/* Newsletter signup */}
       <NewsletterSection />
-      
+
+      {/* Contact + footer */}
       <Footer />
-      
-      {/* Floating bottom CTA - Main Sign Up Now */}
+
+      {/* Floating bottom CTA */}
       <FloatingCTA />
-      
-      {/* Essential background elements only */}
+
+      {/* SEO */}
       <SEOEnhancer />
-      <ExitIntentModal />
-      
+
       {/* WhatsApp widget */}
       <WhatsAppWidget />
-      
+
       {/* Scroll to Top */}
       {isVisible && (
         <button

@@ -1,23 +1,24 @@
-import { Rocket } from "lucide-react";
 import { useState } from "react";
 import { SiInstagram, SiFacebook, SiTiktok, SiYoutube, SiWhatsapp } from "react-icons/si";
+import { Mail, MapPin } from "lucide-react";
 import PolicyModal from "./PolicyModal";
 import { PrivacyPolicyContent, TermsOfServiceContent, CookiePolicyContent, RefundPolicyContent } from "./PolicyContent";
 import { trackSocialClick } from "../lib/firebase";
+import { whatsappLink, CONTACT_EMAIL, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/contact";
 
 export default function Footer() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
 
   const quickLinks = [
-    { name: "Features", id: "features" },
-    { name: "Testimonials", id: "testimonials" },
-    { name: "Pricing", id: "pricing" },
-    { name: "Contact", id: "contact" }
+    { name: "Services", id: "services" },
+    { name: "Coach", id: "coach" },
+    { name: "Results", id: "testimonials" },
+    { name: "The App", id: "app" }
   ];
 
   const legalLinks = [
     "Privacy Policy",
-    "Terms of Service", 
+    "Terms of Service",
     "Cookie Policy",
     "Refund Policy"
   ];
@@ -26,26 +27,22 @@ export default function Footer() {
     {
       name: "Instagram",
       icon: SiInstagram,
-      url: "https://www.instagram.com/launch_lifestyle?igsh=aGVheXd0MjB5dWYx",
-      color: "hover:text-pink-500"
+      url: "https://www.instagram.com/launch_lifestyle?igsh=aGVheXd0MjB5dWYx"
     },
     {
-      name: "Facebook", 
+      name: "Facebook",
       icon: SiFacebook,
-      url: "https://www.facebook.com/share/1BzegpPS9J/?mibextid=wwXIfr",
-      color: "hover:text-blue-500"
+      url: "https://www.facebook.com/share/1BzegpPS9J/?mibextid=wwXIfr"
     },
     {
       name: "TikTok",
       icon: SiTiktok,
-      url: "https://www.tiktok.com/@launch_lifestyle?_t=ZM-8x3bsp1N7sG&_r=1",
-      color: "hover:text-white"
+      url: "https://www.tiktok.com/@launch_lifestyle?_t=ZM-8x3bsp1N7sG&_r=1"
     },
     {
       name: "YouTube",
       icon: SiYoutube,
-      url: "https://youtube.com/@lifeofkeegs?si=h7xbLgK1lBoXPHjh",
-      color: "hover:text-red-400"
+      url: "https://youtube.com/@lifeofkeegs?si=h7xbLgK1lBoXPHjh"
     }
   ];
 
@@ -55,17 +52,7 @@ export default function Footer() {
   };
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  };
-
-  const handleContactClick = () => {
-    window.location.href = 'mailto:keegan.launch@gmail.com';
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleLegalLink = (linkName: string) => {
@@ -87,44 +74,66 @@ export default function Footer() {
     }
   };
 
-  const handleSupportLink = () => {
-    window.location.href = 'mailto:keegan.launch@gmail.com?subject=Support Request&body=Hi Keegan,%0D%0A%0D%0AI need help with...';
-  };
-
   return (
-    <footer className="bg-foreground text-background py-12 px-4 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Footer Content */}
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Footer Brand */}
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="font-grunge text-3xl uppercase tracking-tight text-background font-black">
-                Launch
-              </span>
-            </div>
-            <p className="text-muted mb-4">
-              Empowering people to take control of their fitness journey with personalized workouts, expert guidance, and a supportive community.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              © 2024 Launch Lifestyle. All rights reserved.
-            </p>
+    <footer id="contact" className="bg-card text-foreground border-t border-border">
+      <div className="max-w-6xl mx-auto px-6 lg:px-12 py-16">
+        {/* Contact block */}
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <h2 className="font-heading text-4xl lg:text-6xl uppercase tracking-tight mb-3">
+            Get In <span className="text-primary">Touch</span>
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            Ballito, KZN, South Africa · Building Better Humans since 2017
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href={whatsappLink("Hi Keegan! I'd like to find out more about Launch Lifestyle.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary text-primary-foreground px-8 py-4 font-medium uppercase tracking-wide text-sm flex items-center justify-center gap-2 transition-transform hover:scale-105"
+            >
+              <SiWhatsapp className="w-4 h-4" />
+              WhatsApp 069 484 4629
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="border border-border px-8 py-4 font-medium uppercase tracking-wide text-sm flex items-center justify-center gap-2 hover:border-primary/50 transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              {CONTACT_EMAIL}
+            </a>
           </div>
 
-          {/* Footer Links */}
+          <button
+            onClick={() => handleSocialClick('instagram', INSTAGRAM_URL)}
+            className="inline-flex items-center gap-2 mt-6 text-sm text-muted-foreground hover:text-primary transition-colors"
+          >
+            <SiInstagram className="w-4 h-4" />
+            {INSTAGRAM_HANDLE}
+          </button>
+        </div>
+
+        {/* Footer Content */}
+        <div className="grid md:grid-cols-4 gap-8 mb-12 pt-12 border-t border-border">
+          <div className="md:col-span-1">
+            <span className="font-heading text-3xl uppercase tracking-wide">Launch</span>
+            <p className="text-sm text-muted-foreground mt-3 mb-2">
+              Building Better Humans.
+            </p>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <MapPin className="w-3.5 h-3.5" />
+              Ballito, KZN · Est. 2017
+            </div>
+          </div>
+
           <div>
-            <h4 className="font-black uppercase text-primary mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-muted">
+            <h4 className="font-medium uppercase text-primary text-xs tracking-widest mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-muted-foreground text-sm">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <button 
-                    onClick={
-                      link.name === 'Contact' 
-                        ? handleContactClick 
-                        : link.name === 'Pricing'
-                        ? () => scrollToSection('pricing')
-                        : () => scrollToSection(link.id)
-                    }
+                  <button
+                    onClick={() => scrollToSection(link.id)}
                     className="hover:text-primary transition-colors text-left"
                   >
                     {link.name}
@@ -135,11 +144,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-black uppercase text-primary mb-4">Legal</h4>
-            <ul className="space-y-2 text-muted">
+            <h4 className="font-medium uppercase text-primary text-xs tracking-widest mb-4">Legal</h4>
+            <ul className="space-y-2 text-muted-foreground text-sm">
               {legalLinks.map((link, index) => (
                 <li key={index}>
-                  <button 
+                  <button
                     onClick={() => handleLegalLink(link)}
                     className="hover:text-primary transition-colors text-left"
                   >
@@ -150,86 +159,29 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Social Media Links */}
           <div>
-            <h4 className="font-black uppercase text-primary mb-4">Follow Us</h4>
-            <div className="flex gap-6">
+            <h4 className="font-medium uppercase text-primary text-xs tracking-widest mb-4">Follow</h4>
+            <div className="flex gap-5">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
                 return (
                   <button
                     key={index}
                     onClick={() => handleSocialClick(social.name.toLowerCase(), social.url)}
-                    className={`text-muted transition-all duration-300 ${social.color} hover:scale-125 transform`}
+                    className="text-muted-foreground hover:text-primary transition-colors"
                     title={`Follow Launch Lifestyle on ${social.name}`}
                   >
-                    <IconComponent className="w-7 h-7" />
+                    <IconComponent className="w-5 h-5" />
                   </button>
                 );
               })}
             </div>
-            <p className="text-xs text-muted-foreground mt-3">
-              Stay connected for daily motivation, workout tips, and community support
-            </p>
           </div>
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-muted-foreground pt-8 text-center text-muted-foreground">
-          <p>
-            Built with{" "}
-            <button 
-              onClick={() => {
-                const password = prompt('Analytics Password:');
-                if (password === 'LaunchLifestyle2025!') {
-                  document.body.innerHTML = `
-                    <div style="min-height: 100vh; background: #111827; color: white; font-family: system-ui;">
-                      <div style="background: #1f2937; border-bottom: 1px solid #374151; padding: 32px;">
-                        <h1 style="font-size: 2rem; font-weight: bold; margin: 0;">Launch Lifestyle Analytics</h1>
-                        <p style="color: #9ca3af; margin: 8px 0 0 0;">Real-time business intelligence dashboard</p>
-                      </div>
-                      <div style="padding: 32px;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-                          <div style="background: #1f2937; border: 1px solid #374151; border-radius: 8px; padding: 24px;">
-                            <h3 style="font-size: 1.125rem; font-weight: 600; margin: 0 0 8px 0;">Newsletter Signups</h3>
-                            <div style="font-size: 2rem; font-weight: bold; margin: 8px 0; color: #60a5fa;">1</div>
-                            <div style="color: #9ca3af; font-size: 0.875rem;">Real subscribers</div>
-                          </div>
-                          <div style="background: #1f2937; border: 1px solid #374151; border-radius: 8px; padding: 24px;">
-                            <h3 style="font-size: 1.125rem; font-weight: 600; margin: 0 0 8px 0;">Contact Forms</h3>
-                            <div style="font-size: 2rem; font-weight: bold; margin: 8px 0; color: #34d399;">0</div>
-                            <div style="color: #9ca3af; font-size: 0.875rem;">Customer inquiries</div>
-                          </div>
-                          <div style="background: #1f2937; border: 1px solid #374151; border-radius: 8px; padding: 24px;">
-                            <h3 style="font-size: 1.125rem; font-weight: 600; margin: 0 0 8px 0;">Current Streak</h3>
-                            <div style="font-size: 2rem; font-weight: bold; margin: 8px 0; color: #fb923c;">0 days</div>
-                            <div style="color: #9ca3af; font-size: 0.875rem;">Fitness tracking</div>
-                          </div>
-                        </div>
-                        <button onclick="window.location.reload()" style="background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 500; margin-top: 24px;">
-                          Refresh Data
-                        </button>
-                        <button onclick="window.location.href='/'" style="background: #6b7280; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 500; margin: 24px 0 0 12px;">
-                          Back to Site
-                        </button>
-                      </div>
-                    </div>
-                  `;
-                }
-              }}
-              className="text-red-500 hover:text-red-400 transition-colors cursor-pointer"
-              title="Analytics"
-            >
-              ❤️
-            </button>{" "}
-            for fitness enthusiasts everywhere.{" "}
-            <button 
-              onClick={handleSupportLink}
-              className="text-primary hover:underline"
-            >
-              Need help?
-            </button>
-          </p>
+        <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
+          <p>© {new Date().getFullYear()} Launch Lifestyle. All rights reserved.</p>
         </div>
       </div>
 

@@ -6,39 +6,27 @@ export default function SEOEnhancer() {
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "Coach Keegs Fitness",
+      "name": "Launch Lifestyle",
       "image": "https://launchfit.app/og-image.jpg",
-      "description": "Transform your body in 30 days with personalized home fitness coaching. Money-back guarantee.",
+      "description": "Building Better Humans. Personal training, group classes, youth coaching and neurodiverse specialist coaching in Ballito, plus a global training app.",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Ballito",
+        "addressRegion": "KwaZulu-Natal",
         "addressCountry": "ZA"
       },
-      "telephone": "+27-XXX-XXX-XXXX",
+      "telephone": "+27-69-484-4629",
       "url": "https://launchfit.app",
+      "foundingDate": "2017",
       "sameAs": [
-        "https://instagram.com/coachkeegs",
-        "https://youtube.com/@coachkeegs",
-        "https://tiktok.com/@coachkeegs"
+        "https://www.instagram.com/launch_lifestyle",
+        "https://www.facebook.com/share/1BzegpPS9J/?mibextid=wwXIfr",
+        "https://www.tiktok.com/@launch_lifestyle",
+        "https://youtube.com/@lifeofkeegs"
       ],
-      "openingHours": "Mo-Su 00:00-23:59",
-      "priceRange": "R75-R299",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "247"
-      },
-      "offers": {
-        "@type": "Offer",
-        "name": "30-Day Fitness Transformation",
-        "price": "299",
-        "priceCurrency": "ZAR",
-        "availability": "https://schema.org/InStock",
-        "validFrom": new Date().toISOString(),
-        "validThrough": new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
-      },
       "service": {
         "@type": "Service",
-        "name": "Online Fitness Coaching",
+        "name": "Personal & Group Fitness Coaching",
         "provider": {
           "@type": "Person",
           "name": "Coach Keegs"
@@ -53,26 +41,26 @@ export default function SEOEnhancer() {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How quickly will I see results?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Most clients see visible results within 10-14 days, with significant transformation by day 30. Our program is designed for rapid, sustainable results."
-          }
-        },
-        {
-          "@type": "Question", 
           "name": "Do I need gym equipment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No gym required! Our home fitness program uses bodyweight exercises and minimal equipment you already have at home."
+            "text": "No. The Launch Lifestyle app lets you filter workouts by equipment — full gym, limited kit, or bodyweight only."
           }
         },
         {
           "@type": "Question",
-          "name": "What if I don't see results?",
+          "name": "What if the app isn't for me?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We offer a 30-day money-back guarantee. If you follow the program and don't see results, get a full refund."
+            "text": "We offer a 30-day money-back guarantee, and every in-person service starts with a free first session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where are in-person sessions based?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ballito, KZN, South Africa — at your home, estate, outdoors, or at Sugar Rush Park for group classes."
           }
         }
       ]
@@ -80,33 +68,29 @@ export default function SEOEnhancer() {
 
     // Update meta tags for better SEO
     const updateMetaTags = () => {
-      // Primary meta tags
-      document.title = "Transform Your Body in 30 Days | Coach Keegs Fitness | Money-Back Guarantee";
-      
+      document.title = "Launch Lifestyle | Personal Training & Coaching, Ballito | Coach Keegs";
+
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
-        metaDescription.setAttribute('content', 'Get fit at home in 30 days with Coach Keegs proven fitness program. Join 1,247+ success stories. Money-back guarantee. Start your transformation today!');
+        metaDescription.setAttribute('content', 'Personal training, group classes, youth and neurodiverse specialist coaching in Ballito, plus the Launch Lifestyle app. Building Better Humans since 2017.');
       }
 
-      // Open Graph tags
       const ogTags = [
-        { property: 'og:title', content: 'Transform Your Body in 30 Days | Coach Keegs Fitness' },
-        { property: 'og:description', content: 'Join 1,247+ people who transformed their bodies with our proven home fitness program. 30-day money-back guarantee.' },
+        { property: 'og:title', content: 'Launch Lifestyle | Personal Training & Coaching, Ballito' },
+        { property: 'og:description', content: 'Personal training, group classes, youth and neurodiverse specialist coaching in Ballito, plus a global training app.' },
         { property: 'og:image', content: 'https://launchfit.app/og-image.jpg' },
         { property: 'og:url', content: 'https://launchfit.app' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'Coach Keegs Fitness' }
+        { property: 'og:site_name', content: 'Launch Lifestyle' }
       ];
 
-      // Twitter Card tags
       const twitterTags = [
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Transform Your Body in 30 Days | Coach Keegs Fitness' },
-        { name: 'twitter:description', content: 'Join 1,247+ success stories. Proven home fitness program with 30-day guarantee.' },
+        { name: 'twitter:title', content: 'Launch Lifestyle | Personal Training & Coaching, Ballito' },
+        { name: 'twitter:description', content: 'Personal training, group classes, youth and neurodiverse specialist coaching in Ballito, plus a global training app.' },
         { name: 'twitter:image', content: 'https://launchfit.app/og-image.jpg' }
       ];
 
-      // Add meta tags if they don't exist
       [...ogTags, ...twitterTags].forEach(tag => {
         const existingTag = document.querySelector(`meta[${tag.property ? 'property' : 'name'}="${tag.property || tag.name}"]`);
         if (!existingTag) {
@@ -120,14 +104,13 @@ export default function SEOEnhancer() {
         }
       });
 
-      // Additional SEO meta tags
       const additionalMeta = [
         { name: 'robots', content: 'index, follow, max-image-preview:large' },
         { name: 'googlebot', content: 'index, follow' },
-        { name: 'keywords', content: 'home fitness, weight loss, fitness coach, online training, 30 day transformation, south africa fitness' },
+        { name: 'keywords', content: 'personal training ballito, fitness coach south africa, neurodiverse coaching, kids sports academy, outdoor group fitness, online training app' },
         { name: 'author', content: 'Coach Keegs' },
-        { name: 'geo.region', content: 'ZA' },
-        { name: 'geo.placename', content: 'South Africa' }
+        { name: 'geo.region', content: 'ZA-KZN' },
+        { name: 'geo.placename', content: 'Ballito, South Africa' }
       ];
 
       additionalMeta.forEach(meta => {
@@ -137,6 +120,8 @@ export default function SEOEnhancer() {
           metaTag.setAttribute('name', meta.name);
           metaTag.setAttribute('content', meta.content);
           document.head.appendChild(metaTag);
+        } else {
+          existing.setAttribute('content', meta.content);
         }
       });
     };
@@ -145,7 +130,7 @@ export default function SEOEnhancer() {
     const addStructuredData = (data: any, id: string) => {
       const existing = document.getElementById(id);
       if (existing) existing.remove();
-      
+
       const script = document.createElement('script');
       script.id = id;
       script.type = 'application/ld+json';

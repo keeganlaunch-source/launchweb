@@ -1,44 +1,39 @@
-import { Shield, Award, Users, Star } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Shield, Award, MapPin, Star } from 'lucide-react';
 
 export function TrustSignals() {
   const trustElements = [
     {
-      icon: <Shield className="w-8 h-8 text-green-600" />,
-      title: "100% Money Back Guarantee",
+      icon: <Shield className="w-6 h-6 text-primary" />,
+      title: "Money-Back Guarantee",
       description: "30-day risk-free trial"
     },
     {
-      icon: <Award className="w-8 h-8 text-[#FFD600]" />,
+      icon: <Award className="w-6 h-6 text-primary" />,
       title: "Certified Personal Trainer",
-      description: "10+ years experience"
+      description: "NASM certified"
     },
     {
-      icon: <Users className="w-8 h-8 text-blue-600" />,
-      title: "1,247+ Success Stories",
-      description: "Real transformations"
+      icon: <MapPin className="w-6 h-6 text-primary" />,
+      title: "Est. Ballito, 2017",
+      description: "Locally built, globally used"
     },
     {
-      icon: <Star className="w-8 h-8 text-orange-500" />,
-      title: "5/5 Rating",
-      description: "From verified clients"
+      icon: <Star className="w-6 h-6 text-primary" />,
+      title: "Real Client Results",
+      description: "See testimonials below"
     }
   ];
 
   return (
-    <section className="py-12 bg-white dark:bg-gray-800">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <section className="py-14 bg-background border-y border-border">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {trustElements.map((element, index) => (
-            <Card key={index} className="text-center border-0 shadow-none">
-              <CardContent className="p-4">
-                <div className="flex justify-center mb-3">
-                  {element.icon}
-                </div>
-                <h3 className="font-semibold text-sm mb-1">{element.title}</h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300">{element.description}</p>
-              </CardContent>
-            </Card>
+            <div key={index} className="text-center space-y-2">
+              <div className="flex justify-center">{element.icon}</div>
+              <h3 className="font-medium text-sm uppercase tracking-wide">{element.title}</h3>
+              <p className="text-xs text-muted-foreground">{element.description}</p>
+            </div>
           ))}
         </div>
       </div>

@@ -3,57 +3,58 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 26 83% 5%; /* #1A1A1A */
-  --muted: 60 5% 96%; /* #F5F5F5 */
-  --muted-foreground: 25 5% 45%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 26 83% 5%;
-  --card: 0 0% 100%;
-  --card-foreground: 26 83% 5%;
-  --border: 0 0% 0%; /* #000000 */
-  --input: 20 6% 90%;
-  --primary: 50 100% 50%; /* #FFD600 */
-  --primary-foreground: 0 0% 0%; /* #000000 */
-  --secondary: 60 5% 96%;
-  --secondary-foreground: 24 10% 10%;
-  --accent: 60 5% 96%;
-  --accent-foreground: 24 10% 10%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 60 9% 98%;
-  --ring: 26 83% 5%;
+  /* Launch Lifestyle brand system — permanent dark theme */
+  --background: 0 0% 4%; /* #0A0A0A black */
+  --foreground: 39 35% 92%; /* #F2EDE4 bone */
+  --muted: 0 0% 10%;
+  --muted-foreground: 39 15% 65%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 39 35% 92%;
+  --card: 0 0% 7%;
+  --card-foreground: 39 35% 92%;
+  --border: 0 0% 20%;
+  --input: 0 0% 14%;
+  --primary: 43 80% 46%; /* #D4A017 deep gold */
+  --primary-foreground: 0 0% 4%;
+  --secondary: 141 33% 26%; /* #2D5A3D forest green */
+  --secondary-foreground: 39 35% 92%;
+  --accent: 141 33% 26%;
+  --accent-foreground: 39 35% 92%;
+  --destructive: 0 70% 45%;
+  --destructive-foreground: 39 35% 92%;
+  --ring: 43 80% 46%;
   --radius: 0rem;
 
-  /* Custom fitness theme colors */
-  --primary-dark: 50 90% 45%; /* #E6C200 */
-  --gray-dark: 26 83% 5%; /* #1A1A1A */
-  --gray-medium: 0 0% 20%; /* #333333 */
-  --gray-light: 60 5% 96%; /* #F5F5F5 */
-  
+  /* Direct brand tokens */
+  --brand-black: 0 0% 4%;
+  --brand-gold: 43 80% 46%;
+  --brand-forest: 141 33% 26%;
+  --brand-bone: 39 35% 92%;
+
   /* Mobile viewport height for keyboard handling */
   --vh: 1vh;
 }
 
 .dark {
-  --background: 240 10% 4%;
-  --foreground: 0 0% 98%;
-  --muted: 240 4% 16%;
-  --muted-foreground: 240 5% 65%;
-  --popover: 240 10% 4%;
-  --popover-foreground: 0 0% 98%;
-  --card: 240 10% 4%;
-  --card-foreground: 0 0% 98%;
-  --border: 240 4% 16%;
-  --input: 240 4% 16%;
-  --primary: 50 100% 50%;
-  --primary-foreground: 0 0% 0%;
-  --secondary: 240 4% 16%;
-  --secondary-foreground: 0 0% 98%;
-  --accent: 240 4% 16%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 63% 31%;
-  --destructive-foreground: 0 0% 98%;
-  --ring: 240 5% 84%;
+  --background: 0 0% 4%;
+  --foreground: 39 35% 92%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 39 15% 65%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 39 35% 92%;
+  --card: 0 0% 7%;
+  --card-foreground: 39 35% 92%;
+  --border: 0 0% 20%;
+  --input: 0 0% 14%;
+  --primary: 43 80% 46%;
+  --primary-foreground: 0 0% 4%;
+  --secondary: 141 33% 26%;
+  --secondary-foreground: 39 35% 92%;
+  --accent: 141 33% 26%;
+  --accent-foreground: 39 35% 92%;
+  --destructive: 0 70% 45%;
+  --destructive-foreground: 39 35% 92%;
+  --ring: 43 80% 46%;
 }
 
 @layer base {
@@ -61,32 +62,42 @@
     @apply border-border;
   }
 
+  html {
+    background: hsl(var(--background));
+    scroll-behavior: smooth;
+  }
+
+  /* Offset anchor scroll targets so the fixed header never overlaps them */
+  [id] {
+    scroll-margin-top: 6.5rem;
+  }
+
   body {
     @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+    position: relative;
   }
 
-  /* Custom font for grunge headings */
-  .font-grunge {
-    font-family: Impact, 'Arial Black', sans-serif;
-    font-weight: 900;
+  /* Bebas Neue display type for every headline */
+  .font-grunge, h1, h2, h3, h4 {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
   }
 
-  /* Ensure all text is clearly visible with proper contrast */
   h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     color: inherit;
   }
 
-  /* Fix text contrast issues - but preserve white text on dark backgrounds */
-  .bg-white .text-white,
-  .bg-gray-100 .text-white,
-  .bg-muted .text-white {
-    color: #000000 !important;
-  }
-
-  /* Ensure numbers and statistics are always visible */
-  .stats-number, .metric-value, .social-proof-number {
-    color: #000000 !important;
-    font-weight: bold;
+  /* Subtle film grain overlay across the whole site */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
 
@@ -160,7 +171,7 @@
 
   /* Custom gradient backgrounds */
   .bg-fitness-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
   }
 
   /* Mobile keyboard handling for chat */

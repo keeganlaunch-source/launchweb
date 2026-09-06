@@ -5,12 +5,20 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Montserrat", "system-ui", "sans-serif"],
+        heading: ["'Bebas Neue'", "Impact", "sans-serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        "brand-black": "#0A0A0A",
+        "brand-gold": "#D4A017",
+        "brand-forest": "#2D5A3D",
+        "brand-bone": "#F2EDE4",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

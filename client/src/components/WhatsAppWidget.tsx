@@ -30,7 +30,7 @@ export function WhatsAppWidget() {
     <div className="fixed bottom-6 left-6 z-40">
       <Button
         onClick={openWhatsApp}
-        className={`bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 ${
+        className={`bg-brand-forest hover:opacity-90 text-brand-bone p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 ${
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
         }`}
         size="lg"
