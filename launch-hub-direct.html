@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch Hub - Live Analytics Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #202124;
+            color: #e8eaed;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: #1f1f1f;
+            border-bottom: 1px solid #3c4043;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-right: 32px;
+        }
+
+        .logo span {
+            font-size: 20px;
+            font-weight: 500;
+            color: #FFD600;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 24px;
+        }
+
+        .metric-card {
+            background: #292a2d;
+            border: 1px solid #3c4043;
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+
+        .metric-card:hover {
+            border-color: #4285f4;
+            transform: translateY(-2px);
+        }
+
+        .metric-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #9aa0a6;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 300;
+            color: #e8eaed;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #9aa0a6;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-live {
+            background: #34a853;
+        }
+
+        .status-loading {
+            background: #fbbc04;
+        }
+
+        .platform-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #3c4043;
+        }
+
+        .platform-row:last-child {
+            border-bottom: none;
+        }
+
+        .platform-name {
+            font-weight: 500;
+        }
+
+        .platform-value {
+            color: #4285f4;
+            font-weight: 500;
+        }
+
+        .loading {
+            color: #fbbc04;
+        }
+
+        .overview-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #3c4043;
+        }
+
+        .data-table th {
+            background: #1f1f1f;
+            color: #9aa0a6;
+            font-weight: 500;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        .youtube-icon { background: #FF0000; }
+        .instagram-icon { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+        .facebook-icon { background: #1877F2; }
+        .tiktok-icon { background: #000000; }
+        .whatsapp-icon { background: #25D366; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <span>🚀 Launch Hub</span>
+        </div>
+        <span style="color: #9aa0a6; margin-left: auto;">Live Analytics Dashboard</span>
+    </div>
+
+    <div class="metrics-grid">
+        <!-- YouTube Analytics -->
+        <div class="metric-card">
+            <div class="metric-title">
+                <span class="status-indicator status-live"></span>
+                YouTube Analytics
+            </div>
+            <div class="metric-value" id="youtube-subscribers">Loading...</div>
+            <div class="metric-label">Subscribers</div>
+            <div class="platform-row">
+                <span>Total Views</span>
+                <span class="platform-value" id="youtube-views">Loading...</span>
+            </div>
+            <div class="platform-row">
+                <span>Video Count</span>
+                <span class="platform-value" id="youtube-videos">Loading...</span>
+            </div>
+            <div class="platform-row">
+                <span>Avg Views/Video</span>
+                <span class="platform-value" id="youtube-avg">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Meta Business Suite -->
+        <div class="metric-card">
+            <div class="metric-title">
+                <span class="status-indicator status-loading"></span>
+                Meta Business Suite
+            </div>
+            <div class="metric-value" id="meta-total-followers">2,826</div>
+            <div class="metric-label">Total Followers</div>
+            <div class="platform-row">
+                <span class="social-icon facebook-icon"></span>
+                <span>Facebook</span>
+                <span class="platform-value">2,054</span>
+            </div>
+            <div class="platform-row">
+                <span class="social-icon instagram-icon"></span>
+                <span>Instagram</span>
+                <span class="platform-value">772</span>
+            </div>
+            <div class="platform-row">
+                <span>Ad Reach (30d)</span>
+                <span class="platform-value">43.2K</span>
+            </div>
+        </div>
+
+        <!-- App Store Performance -->
+        <div class="metric-card">
+            <div class="metric-title">
+                <span class="status-indicator status-loading"></span>
+                App Store Performance
+            </div>
+            <div class="metric-value" id="app-downloads">Loading...</div>
+            <div class="metric-label">Total Downloads</div>
+            <div class="platform-row">
+                <span>iOS Rating</span>
+                <span class="platform-value" id="ios-rating">Loading...</span>
+            </div>
+            <div class="platform-row">
+                <span>Android Rating</span>
+                <span class="platform-value" id="android-rating">Loading...</span>
+            </div>
+            <div class="platform-row">
+                <span>Total Reviews</span>
+                <span class="platform-value" id="total-reviews">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Website Analytics -->
+        <div class="metric-card">
+            <div class="metric-title">
+                <span class="status-indicator status-live"></span>
+                Website Analytics
+            </div>
+            <div class="metric-value" id="website-visitors">Loading...</div>
+            <div class="metric-label">Total Visitors</div>
+            <div class="platform-row">
+                <span>Newsletter Signups</span>
+                <span class="platform-value" id="newsletter-signups">Loading...</span>
+            </div>
+            <div class="platform-row">
+                <span>Contact Forms</span>
+                <span class="platform-value" id="contact-forms">Loading...</span>
+            </div>
+            <div class="platform-row">
+                <span>App Downloads</span>
+                <span class="platform-value" id="app-clicks">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Business Intelligence -->
+        <div class="metric-card" style="grid-column: 1 / -1;">
+            <div class="metric-title">
+                <span class="status-indicator status-live"></span>
+                Business Intelligence Summary
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Status</th>
+                        <th>Key Metric</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="social-icon youtube-icon"></span>YouTube</td>
+                        <td><span class="status-indicator status-live"></span>Live</td>
+                        <td id="youtube-key-metric">246 subscribers</td>
+                        <td>Growing</td>
+                    </tr>
+                    <tr>
+                        <td><span class="social-icon facebook-icon"></span>Facebook</td>
+                        <td><span class="status-indicator status-loading"></span>API Pending</td>
+                        <td>2,054 followers</td>
+                        <td>Stable</td>
+                    </tr>
+                    <tr>
+                        <td><span class="social-icon instagram-icon"></span>Instagram</td>
+                        <td><span class="status-indicator status-loading"></span>API Pending</td>
+                        <td>772 followers</td>
+                        <td>Growing</td>
+                    </tr>
+                    <tr>
+                        <td><span class="social-icon tiktok-icon"></span>TikTok</td>
+                        <td><span class="status-indicator status-loading"></span>API Pending</td>
+                        <td>Awaiting API</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><span class="social-icon whatsapp-icon"></span>WhatsApp</td>
+                        <td><span class="status-indicator status-loading"></span>API Pending</td>
+                        <td>Business Account</td>
+                        <td>Active</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Load YouTube Analytics
+        async function loadYouTubeData() {
+            try {
+                const response = await fetch('/api/youtube-analytics');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('youtube-subscribers').textContent = data.subscriberCount.toLocaleString();
+                    document.getElementById('youtube-views').textContent = data.viewCount.toLocaleString();
+                    document.getElementById('youtube-videos').textContent = data.videoCount.toLocaleString();
+                    document.getElementById('youtube-avg').textContent = Math.round(data.viewCount / data.videoCount).toLocaleString();
+                    document.getElementById('youtube-key-metric').textContent = `${data.subscriberCount} subscribers`;
+                }
+            } catch (error) {
+                console.error('YouTube API error:', error);
+            }
+        }
+
+        // Load Website Analytics
+        async function loadWebsiteData() {
+            try {
+                const response = await fetch('/api/analytics/metrics');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('website-visitors').textContent = (data.fullFunnelMetrics?.websiteVisitors || 0).toLocaleString();
+                    document.getElementById('newsletter-signups').textContent = (data.fullFunnelMetrics?.newsletterSignups || 0).toLocaleString();
+                    document.getElementById('contact-forms').textContent = (data.fullFunnelMetrics?.contactInquiries || 0).toLocaleString();
+                    document.getElementById('app-clicks').textContent = (data.fullFunnelMetrics?.appDownloads || 0).toLocaleString();
+                }
+            } catch (error) {
+                console.error('Website analytics error:', error);
+            }
+        }
+
+        // Load App Store Data
+        async function loadAppStoreData() {
+            try {
+                const response = await fetch('/api/app-store-metrics');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('app-downloads').textContent = (data.combined?.totalDownloads || 0).toLocaleString();
+                    document.getElementById('ios-rating').textContent = (data.ios?.rating || 0).toFixed(1) + '/5';
+                    document.getElementById('android-rating').textContent = (data.android?.rating || 0).toFixed(1) + '/5';
+                    document.getElementById('total-reviews').textContent = (data.combined?.totalReviews || 0).toLocaleString();
+                }
+            } catch (error) {
+                console.error('App Store API error:', error);
+            }
+        }
+
+        // Real-time updates
+        function startRealtimeUpdates() {
+            setInterval(() => {
+                loadYouTubeData();
+                loadWebsiteData();
+                loadAppStoreData();
+            }, 30000); // Update every 30 seconds
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Launch Hub Direct Access initialized');
+            console.log('Loading live analytics data...');
+            
+            // Load initial data
+            loadYouTubeData();
+            loadWebsiteData();
+            loadAppStoreData();
+            
+            // Start real-time updates
+            startRealtimeUpdates();
+        });
+    </script>
+</body>
+</html>

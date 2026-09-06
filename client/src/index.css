@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 26 83% 5%; /* #1A1A1A */
+  --muted: 60 5% 96%; /* #F5F5F5 */
+  --muted-foreground: 25 5% 45%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 26 83% 5%;
+  --card: 0 0% 100%;
+  --card-foreground: 26 83% 5%;
+  --border: 0 0% 0%; /* #000000 */
+  --input: 20 6% 90%;
+  --primary: 50 100% 50%; /* #FFD600 */
+  --primary-foreground: 0 0% 0%; /* #000000 */
+  --secondary: 60 5% 96%;
+  --secondary-foreground: 24 10% 10%;
+  --accent: 60 5% 96%;
+  --accent-foreground: 24 10% 10%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 60 9% 98%;
+  --ring: 26 83% 5%;
+  --radius: 0rem;
+
+  /* Custom fitness theme colors */
+  --primary-dark: 50 90% 45%; /* #E6C200 */
+  --gray-dark: 26 83% 5%; /* #1A1A1A */
+  --gray-medium: 0 0% 20%; /* #333333 */
+  --gray-light: 60 5% 96%; /* #F5F5F5 */
+  
+  /* Mobile viewport height for keyboard handling */
+  --vh: 1vh;
+}
+
+.dark {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --popover: 240 10% 4%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 4%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 4% 16%;
+  --input: 240 4% 16%;
+  --primary: 50 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 4% 16%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 5% 84%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+  }
+
+  /* Custom font for grunge headings */
+  .font-grunge {
+    font-family: Impact, 'Arial Black', sans-serif;
+    font-weight: 900;
+  }
+
+  /* Ensure all text is clearly visible with proper contrast */
+  h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
+    color: inherit;
+  }
+
+  /* Fix text contrast issues - but preserve white text on dark backgrounds */
+  .bg-white .text-white,
+  .bg-gray-100 .text-white,
+  .bg-muted .text-white {
+    color: #000000 !important;
+  }
+
+  /* Ensure numbers and statistics are always visible */
+  .stats-number, .metric-value, .social-proof-number {
+    color: #000000 !important;
+    font-weight: bold;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.8s ease-out;
+  }
+
+  .animate-slide-in-delay {
+    animation: slideIn 0.8s ease-out 0.2s both;
+  }
+
+  .animate-slide-in-delay-2 {
+    animation: slideIn 0.8s ease-out 0.4s both;
+  }
+
+  .animate-slide-in-delay-3 {
+    animation: slideIn 0.8s ease-out 0.6s both;
+  }
+
+  /* Custom hover effects */
+  .hero-shadow {
+    transition: all 0.3s ease;
+  }
+
+  .hero-shadow:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 hsl(var(--border));
+  }
+
+  .card-shadow {
+    transition: all 0.3s ease;
+  }
+
+  .card-shadow:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 5px 5px 0 hsl(var(--border));
+  }
+
+  /* Navigation link underline effect */
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: hsl(var(--primary));
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Custom gradient backgrounds */
+  .bg-fitness-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+  }
+
+  /* Mobile keyboard handling for chat */
+  @supports (-webkit-touch-callout: none) {
+    .chat-window {
+      height: 100vh;
+      height: 100dvh; /* Dynamic viewport height for mobile */
+    }
+  }
+
+  /* Prevent zoom on mobile input focus */
+  @media screen and (max-width: 640px) {
+    input[type="text"], 
+    input[type="email"], 
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Smooth transitions for mobile chat */
+  .chat-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Mobile safe area handling */
+  @supports (padding: max(0px)) {
+    .mobile-safe-bottom {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+  }
+
+  /* Exit intent popup animation */
+  @keyframes pulse-subtle {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s ease-in-out infinite;
+  }
+}

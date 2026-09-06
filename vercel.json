@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
+  "installCommand": "npm install",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 60,
+      "includeFiles": "{*.html,attached_assets/**,pdfs/**}"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/attached_assets/(.*)", "destination": "/api" },
+    { "source": "/(analytics-hub|analytics-hub.html|launch-hub|launch-hub-direct.html|analytics-dashboard|download-hub|get-hub|payment-success|payment-cancelled|unsubscribe)", "destination": "/api" },
+    { "source": "/(analytics|download-app|hub-source)/(.*)", "destination": "/api" },
+    { "source": "/((?!assets/|.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }
+  ],
+  "crons": [
+    { "path": "/api/cron/tri-weekly-email", "schedule": "0 14 * * 1,3,5" },
+    { "path": "/api/cron/weekly-report", "schedule": "0 9 * * 1" }
+  ]
+}

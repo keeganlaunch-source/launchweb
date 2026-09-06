@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch Analytics Hub - Real-Time Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #202124;
+            color: #e8eaed;
+            line-height: 1.5;
+        }
+
+        .dashboard-header {
+            background: #1a1a1a;
+            padding: 20px;
+            border-bottom: 1px solid #3c4043;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: #e8eaed;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: #9aa0a6;
+            margin-top: 4px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #0d47a1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #4fc3f7;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .metric-card {
+            background: #303134;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #3c4043;
+            transition: transform 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: #4285f4;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #e8eaed;
+        }
+
+        .card-source {
+            font-size: 12px;
+            color: #9aa0a6;
+            background: #1a1a1a;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #4285f4;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #9aa0a6;
+        }
+
+        .utm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .utm-source {
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #3c4043;
+        }
+
+        .utm-platform {
+            font-size: 12px;
+            color: #9aa0a6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .utm-users {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4285f4;
+            margin: 4px 0;
+        }
+
+        .utm-conversions {
+            font-size: 12px;
+            color: #34a853;
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .event-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #1a1a1a;
+            border-radius: 6px;
+        }
+
+        .event-name {
+            font-size: 14px;
+            color: #e8eaed;
+        }
+
+        .event-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4285f4;
+        }
+
+        .meta-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .meta-metric {
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .meta-metric-label {
+            font-size: 12px;
+            color: #9aa0a6;
+            margin-bottom: 4px;
+        }
+
+        .meta-metric-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4285f4;
+        }
+
+        .retention-chart {
+            margin-top: 16px;
+        }
+
+        .retention-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .retention-week {
+            width: 60px;
+            font-size: 12px;
+            color: #9aa0a6;
+        }
+
+        .retention-progress {
+            flex: 1;
+            height: 20px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            margin: 0 12px;
+            overflow: hidden;
+        }
+
+        .retention-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4285f4, #34a853);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .retention-percent {
+            font-size: 12px;
+            color: #e8eaed;
+            width: 40px;
+        }
+
+        .error-state {
+            color: #f28b82;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading-state {
+            color: #9aa0a6;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .last-updated {
+            font-size: 12px;
+            color: #9aa0a6;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <div>
+            <div class="header-title">Launch Analytics Hub</div>
+            <div class="header-subtitle">Real-time data from GA4 Property 492500447, Firebase launch-f6c4d, Meta Pixel 1181578407319125</div>
+        </div>
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            <span>Live Data</span>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Real-time Users -->
+        <div class="metric-card">
+            <div class="card-header">
+                <div class="card-title">Real-time Users</div>
+                <div class="card-source">GA4</div>
+            </div>
+            <div class="metric-value" id="realtime-users">Loading...</div>
+            <div class="metric-label">Users currently active</div>
+        </div>
+
+        <!-- Total Sessions Today -->
+        <div class="metric-card">
+            <div class="card-header">
+                <div class="card-title">Sessions Today</div>
+                <div class="card-source">GA4</div>
+            </div>
+            <div class="metric-value" id="total-sessions">Loading...</div>
+            <div class="metric-label">Total sessions</div>
+        </div>
+
+        <!-- Page Views -->
+        <div class="metric-card">
+            <div class="card-header">
+                <div class="card-title">Page Views</div>
+                <div class="card-source">GA4</div>
+            </div>
+            <div class="metric-value" id="page-views">Loading...</div>
+            <div class="metric-label">Total page views today</div>
+        </div>
+
+        <!-- Conversion Rate -->
+        <div class="metric-card">
+            <div class="card-header">
+                <div class="card-title">Conversion Rate</div>
+                <div class="card-source">GA4</div>
+            </div>
+            <div class="metric-value" id="conversion-rate">Loading...</div>
+            <div class="metric-label">Newsletter signups / total users</div>
+        </div>
+
+        <!-- UTM Traffic Sources -->
+        <div class="metric-card" style="grid-column: span 2;">
+            <div class="card-header">
+                <div class="card-title">UTM Traffic Sources</div>
+                <div class="card-source">GA4</div>
+            </div>
+            <div class="utm-grid" id="utm-sources">
+                <div class="loading-state">Loading UTM data...</div>
+            </div>
+        </div>
+
+        <!-- Key Events -->
+        <div class="metric-card">
+            <div class="card-header">
+                <div class="card-title">Key Events Today</div>
+                <div class="card-source">GA4</div>
+            </div>
+            <div class="events-list" id="key-events">
+                <div class="loading-state">Loading events...</div>
+            </div>
+        </div>
+
+        <!-- Meta Pixel Metrics -->
+        <div class="metric-card">
+            <div class="card-header">
+                <div class="card-title">Meta Ad Performance</div>
+                <div class="card-source">Meta Pixel</div>
+            </div>
+            <div class="meta-metrics" id="meta-metrics">
+                <div class="loading-state">Loading Meta data...</div>
+            </div>
+        </div>
+
+        <!-- User Retention -->
+        <div class="metric-card" style="grid-column: span 2;">
+            <div class="card-header">
+                <div class="card-title">User Retention</div>
+                <div class="card-source">Firebase</div>
+            </div>
+            <div class="retention-chart" id="retention-chart">
+                <div class="loading-state">Loading retention data...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="last-updated" id="last-updated">
+        Last updated: Loading...
+    </div>
+
+    <script>
+        class LaunchAnalyticsHub {
+            constructor() {
+                this.updateInterval = 30000; // 30 seconds
+                this.init();
+            }
+
+            async init() {
+                await this.loadAllData();
+                setInterval(() => this.loadAllData(), this.updateInterval);
+            }
+
+            async loadAllData() {
+                try {
+                    await Promise.all([
+                        this.loadRealtimeData(),
+                        this.loadEvents(),
+                        this.loadUTMSources(),
+                        this.loadMetaPixelData(),
+                        this.loadRetentionData(),
+                        this.loadStatsTotals()
+                    ]);
+                    this.updateTimestamp();
+                } catch (error) {
+                    console.error('Error loading dashboard data:', error);
+                }
+            }
+
+            async loadRealtimeData() {
+                try {
+                    const response = await fetch('/api/ga4/realtime');
+                    if (!response.ok) throw new Error('Failed to fetch realtime data');
+                    const data = await response.json();
+                    
+                    document.getElementById('realtime-users').textContent = data.activeUsers || 0;
+                } catch (error) {
+                    console.error('Realtime data error:', error);
+                    document.getElementById('realtime-users').textContent = 'Error';
+                }
+            }
+
+            async loadEvents() {
+                try {
+                    const response = await fetch('/api/ga4/events');
+                    if (!response.ok) throw new Error('Failed to fetch events');
+                    const data = await response.json();
+                    
+                    const eventsContainer = document.getElementById('key-events');
+                    eventsContainer.innerHTML = '';
+                    
+                    const topEvents = Object.entries(data)
+                        .sort(([,a], [,b]) => b - a)
+                        .slice(0, 6);
+                    
+                    topEvents.forEach(([eventName, count]) => {
+                        const eventItem = document.createElement('div');
+                        eventItem.className = 'event-item';
+                        eventItem.innerHTML = `
+                            <div class="event-name">${this.formatEventName(eventName)}</div>
+                            <div class="event-count">${count}</div>
+                        `;
+                        eventsContainer.appendChild(eventItem);
+                    });
+                } catch (error) {
+                    console.error('Events data error:', error);
+                    document.getElementById('key-events').innerHTML = '<div class="error-state">Error loading events</div>';
+                }
+            }
+
+            async loadUTMSources() {
+                try {
+                    const response = await fetch('/api/utm/sources');
+                    if (!response.ok) throw new Error('Failed to fetch UTM sources');
+                    const data = await response.json();
+                    
+                    const utmContainer = document.getElementById('utm-sources');
+                    utmContainer.innerHTML = '';
+                    
+                    const platforms = ['instagram', 'facebook', 'tiktok', 'youtube', 'whatsapp', 'threads', 'twitter'];
+                    
+                    platforms.forEach(platform => {
+                        const platformData = data[platform];
+                        if (platformData) {
+                            const utmSource = document.createElement('div');
+                            utmSource.className = 'utm-source';
+                            utmSource.innerHTML = `
+                                <div class="utm-platform">${platform}</div>
+                                <div class="utm-users">${platformData.users || 0}</div>
+                                <div class="utm-conversions">${platformData.conversions || 0} conv</div>
+                            `;
+                            utmContainer.appendChild(utmSource);
+                        }
+                    });
+                } catch (error) {
+                    console.error('UTM sources error:', error);
+                    document.getElementById('utm-sources').innerHTML = '<div class="error-state">Error loading UTM data</div>';
+                }
+            }
+
+            async loadMetaPixelData() {
+                try {
+                    const response = await fetch('/api/meta/pixel');
+                    if (!response.ok) throw new Error('Failed to fetch Meta Pixel data');
+                    const data = await response.json();
+                    
+                    const metaContainer = document.getElementById('meta-metrics');
+                    metaContainer.innerHTML = `
+                        <div class="meta-metric">
+                            <div class="meta-metric-label">Impressions</div>
+                            <div class="meta-metric-value">${this.formatNumber(data.impressions || 0)}</div>
+                        </div>
+                        <div class="meta-metric">
+                            <div class="meta-metric-label">Clicks</div>
+                            <div class="meta-metric-value">${this.formatNumber(data.clicks || 0)}</div>
+                        </div>
+                        <div class="meta-metric">
+                            <div class="meta-metric-label">Reach</div>
+                            <div class="meta-metric-value">${this.formatNumber(data.reach || 0)}</div>
+                        </div>
+                        <div class="meta-metric">
+                            <div class="meta-metric-label">CTR</div>
+                            <div class="meta-metric-value">${(data.ctr || 0).toFixed(2)}%</div>
+                        </div>
+                    `;
+                } catch (error) {
+                    console.error('Meta Pixel error:', error);
+                    document.getElementById('meta-metrics').innerHTML = '<div class="error-state">Error loading Meta data</div>';
+                }
+            }
+
+            async loadRetentionData() {
+                try {
+                    const response = await fetch('/api/firebase/retention');
+                    if (!response.ok) throw new Error('Failed to fetch retention data');
+                    const data = await response.json();
+                    
+                    const retentionContainer = document.getElementById('retention-chart');
+                    retentionContainer.innerHTML = '';
+                    
+                    if (data.cohorts && data.cohorts.length > 0) {
+                        data.cohorts.slice(0, 5).forEach(cohort => {
+                            const bar = document.createElement('div');
+                            bar.className = 'retention-bar';
+                            bar.innerHTML = `
+                                <div class="retention-week">Week ${cohort.week}</div>
+                                <div class="retention-progress">
+                                    <div class="retention-fill" style="width: ${cohort.retentionRate}%"></div>
+                                </div>
+                                <div class="retention-percent">${cohort.retentionRate.toFixed(1)}%</div>
+                            `;
+                            retentionContainer.appendChild(bar);
+                        });
+                    } else {
+                        retentionContainer.innerHTML = '<div class="error-state">No retention data available</div>';
+                    }
+                } catch (error) {
+                    console.error('Retention data error:', error);
+                    document.getElementById('retention-chart').innerHTML = '<div class="error-state">Error loading retention data</div>';
+                }
+            }
+
+            async loadStatsTotals() {
+                try {
+                    const response = await fetch('/api/stats/totals');
+                    if (!response.ok) throw new Error('Failed to fetch stats totals');
+                    const data = await response.json();
+                    
+                    document.getElementById('total-sessions').textContent = this.formatNumber(data.totalSessions || 0);
+                    document.getElementById('page-views').textContent = this.formatNumber(data.totalPageViews || 0);
+                    document.getElementById('conversion-rate').textContent = `${(data.conversionRate || 0).toFixed(1)}%`;
+                } catch (error) {
+                    console.error('Stats totals error:', error);
+                    document.getElementById('total-sessions').textContent = 'Error';
+                    document.getElementById('page-views').textContent = 'Error';
+                    document.getElementById('conversion-rate').textContent = 'Error';
+                }
+            }
+
+            formatEventName(eventName) {
+                return eventName.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            }
+
+            formatNumber(num) {
+                if (num >= 1000000) {
+                    return (num / 1000000).toFixed(1) + 'M';
+                } else if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + 'K';
+                }
+                return num.toString();
+            }
+
+            updateTimestamp() {
+                const now = new Date();
+                document.getElementById('last-updated').textContent = 
+                    `Last updated: ${now.toLocaleString()}`;
+            }
+        }
+
+        // Initialize dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new LaunchAnalyticsHub();
+        });
+    </script>
+</body>
+</html>

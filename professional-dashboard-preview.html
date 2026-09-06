@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch Lifestyle - Professional Analytics Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        .export-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .export-btn:hover {
+            background: #2563eb;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.75rem;
+            font-weight: 500;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .status-icon {
+            width: 16px;
+            height: 16px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .overflow-x {
+            overflow-x: auto;
+        }
+
+        .ip-address {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            background: #f1f5f9;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .user-agent {
+            font-size: 0.75rem;
+            color: #64748b;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>Launch Lifestyle - Complete Metrics Export</h1>
+                <p>Generated: June 9, 2025</p>
+            </div>
+            <button class="export-btn" onclick="downloadCSV()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Export Report
+            </button>
+        </div>
+
+        <!-- Summary Metrics -->
+        <div class="card">
+            <h2 class="card-title">SUMMARY METRICS</h2>
+            <div class="overflow-x">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Data Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Newsletter Subscribers</td>
+                            <td class="metric-value">2</td>
+                            <td><span class="status-badge">Verified</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total Contact Messages</td>
+                            <td class="metric-value">0</td>
+                            <td><span class="status-badge">Verified</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total Page Views</td>
+                            <td class="metric-value">37</td>
+                            <td><span class="status-badge">Verified</span></td>
+                        </tr>
+                        <tr>
+                            <td>Active Since</td>
+                            <td class="metric-value">June 8, 2025</td>
+                            <td><span class="status-badge">Verified</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Newsletter Subscribers -->
+        <div class="card">
+            <h2 class="card-title">NEWSLETTER SUBSCRIBERS</h2>
+            <div class="overflow-x">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>IP Address</th>
+                            <th>Device</th>
+                            <th>Signup Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Emma Jordan</strong></td>
+                            <td>emmajordan@live.co.za</td>
+                            <td>Ballito, KwaZulu-Natal, South Africa</td>
+                            <td><span class="ip-address">102.22.252.23</span></td>
+                            <td class="user-agent">iPad (Chrome)</td>
+                            <td>June 8, 2025</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Keegan Launch</strong></td>
+                            <td>keegan.launch@gmail.com</td>
+                            <td>Ballito, KwaZulu-Natal, South Africa</td>
+                            <td><span class="ip-address">102.22.252.22</span></td>
+                            <td class="user-agent">Desktop Browser</td>
+                            <td>June 9, 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Geographic Breakdown -->
+        <div class="card">
+            <h2 class="card-title">GEOGRAPHIC BREAKDOWN</h2>
+            <div class="overflow-x">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Region</th>
+                            <th>Subscriber Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>South Africa</strong></td>
+                            <td>Ballito</td>
+                            <td>KwaZulu-Natal</td>
+                            <td class="metric-value">2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- System Health -->
+        <div class="card">
+            <h2 class="card-title">SYSTEM HEALTH</h2>
+            <div class="overflow-x">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Status</th>
+                            <th>Last Check</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Database</td>
+                            <td>
+                                <div class="status-badge">
+                                    <div class="status-icon"></div>
+                                    Connected
+                                </div>
+                            </td>
+                            <td>June 9, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Email Service</td>
+                            <td>
+                                <div class="status-badge">
+                                    <div class="status-icon"></div>
+                                    Operational
+                                </div>
+                            </td>
+                            <td>June 9, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Website</td>
+                            <td>
+                                <div class="status-badge">
+                                    <div class="status-icon"></div>
+                                    Live
+                                </div>
+                            </td>
+                            <td>June 9, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Analytics</td>
+                            <td>
+                                <div class="status-badge">
+                                    <div class="status-icon"></div>
+                                    Recording
+                                </div>
+                            </td>
+                            <td>June 9, 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadCSV() {
+            const csvContent = `Launch Lifestyle - Complete Metrics Export
+Generated: ${new Date().toISOString()}
+
+SUMMARY METRICS
+Metric,Value,Data Type
+Total Newsletter Subscribers,2,Verified
+Total Contact Messages,0,Verified
+Total Page Views,37,Verified
+Active Since,June 8 2025,Verified
+
+NEWSLETTER SUBSCRIBERS
+ID,Email,Name,Country,City,Region,IP Address,User Agent,Signup Date,Signup Time
+1,"emmajordan@live.co.za","Emma Jordan","South Africa","Ballito","KwaZulu-Natal","102.22.252.23","Mozilla/5.0 (iPad; CPU OS 18_5_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/137.0.7151.79 Mobile/15E148 Safari/604.1","6/8/2025","6:23:36 PM"
+2,"keegan.launch@gmail.com","Keegan Launch","South Africa","Ballito","KwaZulu-Natal","102.22.252.22","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","6/9/2025","8:08:26 AM"
+
+GEOGRAPHIC BREAKDOWN
+Country,City,Region,Subscriber Count
+South Africa,Ballito,KwaZulu-Natal,2
+
+SYSTEM HEALTH
+Component,Status,Last Check
+Database,Connected,June 9 2025
+Email Service,Operational,June 9 2025
+Website,Live,June 9 2025
+Analytics,Recording,June 9 2025
+
+CONVERSION FUNNEL
+Stage,Count,Rate
+Website Visitors,37,100%
+Newsletter Signups,2,5.4%
+Contact Messages,0,0%
+
+TRAFFIC SOURCES
+Source,Visitors,Percentage
+Direct,37,100%
+Social Media,0,0%
+Search Engines,0,0%
+Referrals,0,0%`;
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `launch-complete-metrics-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            // Show confirmation
+            alert('Complete metrics report downloaded successfully!');
+        }
+    </script>
+</body>
+</html>

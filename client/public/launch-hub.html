@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#111827">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LAUNCH HUB">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDUiIGZpbGw9IiMwMDAwMDAiLz4KPHR4dCB4PSI5MCIgeT0iMTAwIiBmb250LWZhbWlseT0ic3lzdGVtLXVpIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkxBVU5DSCBIVUI8L3R4dD4KPHN2Zz4=">
+    <title>LAUNCH HUB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #111827;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .login-card {
+            background: #1f2937;
+            padding: 32px;
+            border-radius: 8px;
+            border: 1px solid #374151;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .login-card h2 {
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: #1f2937;
+            border-bottom: 1px solid #374151;
+            padding: 32px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .header p {
+            color: #9ca3af;
+            margin: 8px 0 0 0;
+        }
+        
+        .content {
+            padding: 32px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .metric-card {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 24px;
+        }
+        
+        .metric-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+        
+        .metric-value.blue { color: #60a5fa; }
+        .metric-value.green { color: #34d399; }
+        .metric-value.orange { color: #fb923c; }
+        .metric-value.purple { color: #a78bfa; }
+        
+        .metric-desc {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .btn-control {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .btn-refresh { background: #2563eb; }
+        .btn-newsletter { background: #10b981; }
+        .btn-contact { background: #f59e0b; }
+        .btn-download { background: #8b5cf6; }
+        .btn-secondary { background: #6b7280; }
+        
+        .status-card {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .status-card h4 {
+            margin: 0 0 12px 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .status-card p {
+            margin: 0;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 16px;
+            }
+            
+            .header {
+                padding: 24px 16px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn-control {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <h2>LAUNCH HUB Access</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Access Analytics</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboard">
+        <div class="header">
+            <h1>LAUNCH HUB</h1>
+            <p>Personal Analytics Dashboard</p>
+        </div>
+        
+        <div class="content">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Newsletter Signups</h3>
+                    <div class="metric-value blue" id="newsletterCount">1</div>
+                    <div class="metric-desc">Real subscribers</div>
+                </div>
+                
+                <div class="metric-card">
+                    <h3>Contact Forms</h3>
+                    <div class="metric-value green" id="contactCount">0</div>
+                    <div class="metric-desc">Customer inquiries</div>
+                </div>
+                
+                <div class="metric-card">
+                    <h3>App Downloads</h3>
+                    <div class="metric-value orange" id="downloadCount">0</div>
+                    <div class="metric-desc">Total downloads</div>
+                </div>
+                
+                <div class="metric-card">
+                    <h3>Page Views</h3>
+                    <div class="metric-value purple" id="pageViewCount">0</div>
+                    <div class="metric-desc">Total visits</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn-control btn-refresh" onclick="refreshData()">Refresh Data</button>
+                <button class="btn-control btn-newsletter" onclick="incrementMetric('newsletter')">+1 Newsletter</button>
+                <button class="btn-control btn-contact" onclick="incrementMetric('contact')">+1 Contact</button>
+                <button class="btn-control btn-download" onclick="incrementMetric('download')">+1 Download</button>
+            </div>
+            
+            <div class="status-card">
+                <h4>Database Status</h4>
+                <p id="statusText">✅ Local database active • Last updated: <span id="lastUpdated">Never</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Local storage keys
+        const STORAGE_KEY = 'launchHubData';
+        const AUTH_KEY = 'launchHubAuth';
+        
+        // Default data
+        let analyticsData = {
+            newsletter: 1,
+            contact: 0,
+            download: 0,
+            pageView: 0,
+            lastUpdated: Date.now()
+        };
+        
+        // Load data from localStorage
+        function loadData() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                analyticsData = JSON.parse(stored);
+            }
+            updateDisplay();
+        }
+        
+        // Save data to localStorage
+        function saveData() {
+            analyticsData.lastUpdated = Date.now();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(analyticsData));
+            updateDisplay();
+        }
+        
+        // Update display
+        function updateDisplay() {
+            document.getElementById('newsletterCount').textContent = analyticsData.newsletter;
+            document.getElementById('contactCount').textContent = analyticsData.contact;
+            document.getElementById('downloadCount').textContent = analyticsData.download;
+            document.getElementById('pageViewCount').textContent = analyticsData.pageView;
+            document.getElementById('lastUpdated').textContent = new Date(analyticsData.lastUpdated).toLocaleTimeString();
+        }
+        
+        // Increment metric
+        function incrementMetric(type) {
+            analyticsData[type]++;
+            saveData();
+        }
+        
+        // Refresh data from live analytics
+        async function refreshData() {
+            try {
+                const response = await fetch('/api/analytics-data');
+                if (response.ok) {
+                    const liveData = await response.json();
+                    
+                    // Update with real analytics data
+                    analyticsData.newsletter = liveData.eventCounts?.total?.newsletterSignups || analyticsData.newsletter;
+                    analyticsData.contact = liveData.eventCounts?.total?.contactForms || analyticsData.contact;
+                    analyticsData.download = liveData.eventCounts?.total?.appDownloads || analyticsData.download;
+                    analyticsData.pageView = liveData.eventCounts?.total?.pageViews || analyticsData.pageView;
+                    
+                    saveData();
+                    showSyncStatus('✅ Synced with live data');
+                } else {
+                    showSyncStatus('📱 Using offline data');
+                }
+            } catch (error) {
+                showSyncStatus('📱 Using offline data');
+            }
+            updateDisplay();
+        }
+        
+        // Auto-sync every 30 seconds when online
+        function startAutoSync() {
+            setInterval(async () => {
+                if (navigator.onLine) {
+                    await refreshData();
+                }
+            }, 30000);
+        }
+        
+        function showSyncStatus(message) {
+            const statusElement = document.getElementById('statusText');
+            const originalText = statusElement.innerHTML;
+            statusElement.innerHTML = message + ' • Last updated: <span id="lastUpdated">' + new Date(analyticsData.lastUpdated).toLocaleTimeString() + '</span>';
+            
+            setTimeout(() => {
+                statusElement.innerHTML = originalText;
+                document.getElementById('lastUpdated').textContent = new Date(analyticsData.lastUpdated).toLocaleTimeString();
+            }, 3000);
+        }
+        
+        // Authentication
+        function checkAuth() {
+            const authToken = sessionStorage.getItem(AUTH_KEY);
+            if (authToken === 'authenticated') {
+                showDashboard();
+            }
+        }
+        
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            loadData();
+            startAutoSync();
+            
+            // Initial sync on login
+            setTimeout(() => {
+                refreshData();
+            }, 1000);
+        }
+        
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            
+            if (password === 'LaunchLifestyle2025!') {
+                sessionStorage.setItem(AUTH_KEY, 'authenticated');
+                showDashboard();
+            } else {
+                alert('Incorrect password');
+                document.getElementById('password').value = '';
+            }
+        });
+        
+        // Initialize
+        checkAuth();
+        
+        // Service worker registration for offline functionality
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdsYXVuY2gtaHViLXYxJzsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignaW5zdGFsbCcsIChldmVudCkgPT4gewogICAgZXZlbnQud2FpdFVudGlsKAogICAgICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpCiAgICApOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignZmV0Y2gnLCAoZXZlbnQpID0+IHsKICAgIGV2ZW50LnJlc3BvbmRXaXRoKAogICAgICAgIGZldGNoKGV2ZW50LnJlcXVlc3QpLmNhdGNoKCgpID0+IHsKICAgICAgICAgICAgcmV0dXJuIG5ldyBSZXNwb25zZSgnT2ZmbGluZScsIHsgc3RhdHVzOiAyMDAgfSk7CiAgICAgICAgfSkKICAgICk7Cn0pOw==')
+            .then(() => console.log('PWA ready'))
+            .catch(() => console.log('PWA registration failed'));
+        }
+    </script>
+</body>
+</html>

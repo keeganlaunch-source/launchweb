@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
+        <meta name="theme-color" content="#111827" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="LAUNCH HUB" />
+        <title>LAUNCH HUB</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+                background: #111827;
+                color: white;
+                min-height: 100vh;
+            }
+            .login-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #111827;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+            }
+            .login-card {
+                background: #1f2937;
+                padding: 40px;
+                border-radius: 12px;
+                border: 1px solid #374151;
+                width: 90%;
+                max-width: 400px;
+            }
+            .login-card h2 {
+                margin-bottom: 24px;
+                font-size: 1.5rem;
+                text-align: center;
+                font-weight: 700;
+            }
+            input[type="password"] {
+                width: 100%;
+                padding: 16px;
+                background: #111827;
+                border: 2px solid #374151;
+                border-radius: 8px;
+                color: white;
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+            input[type="password"]:focus {
+                outline: none;
+                border-color: #2563eb;
+            }
+            .btn {
+                width: 100%;
+                padding: 16px 24px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 16px;
+                background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+                color: white;
+            }
+            .btn:hover {
+                transform: translateY(-1px);
+            }
+            .dashboard {
+                display: none;
+                min-height: 100vh;
+            }
+            .header {
+                background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+                border-bottom: 1px solid #374151;
+                padding: 40px;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+                font-weight: 800;
+                margin: 0;
+                background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .header p {
+                color: #9ca3af;
+                margin: 12px 0 0 0;
+                font-size: 1.1rem;
+            }
+            .content {
+                padding: 40px;
+            }
+            .metrics-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 32px;
+                margin-bottom: 40px;
+            }
+            .metric-card {
+                background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+                border: 1px solid #374151;
+                border-radius: 16px;
+                padding: 32px;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+            .metric-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+            }
+            .metric-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: var(--accent-color);
+            }
+            .metric-card.blue {
+                --accent-color: linear-gradient(
+                    135deg,
+                    #60a5fa 0%,
+                    #3b82f6 100%
+                );
+            }
+            .metric-card.green {
+                --accent-color: linear-gradient(
+                    135deg,
+                    #34d399 0%,
+                    #10b981 100%
+                );
+            }
+            .metric-card.orange {
+                --accent-color: linear-gradient(
+                    135deg,
+                    #fb923c 0%,
+                    #f59e0b 100%
+                );
+            }
+            .metric-card.purple {
+                --accent-color: linear-gradient(
+                    135deg,
+                    #a78bfa 0%,
+                    #8b5cf6 100%
+                );
+            }
+            .metric-card h3 {
+                font-size: 1.125rem;
+                font-weight: 600;
+                margin: 0 0 16px 0;
+                color: #e5e7eb;
+            }
+            .metric-value {
+                font-size: 3rem;
+                font-weight: 800;
+                margin: 16px 0;
+                line-height: 1;
+            }
+            .metric-value.blue {
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .metric-value.green {
+                background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .metric-value.orange {
+                background: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .metric-value.purple {
+                background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .metric-desc {
+                color: #9ca3af;
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+            .controls {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 16px;
+                margin-bottom: 32px;
+            }
+            .btn-control {
+                padding: 16px 24px;
+                border: none;
+                border-radius: 12px;
+                cursor: pointer;
+                font-weight: 600;
+                color: white;
+                font-size: 14px;
+                transition: all 0.2s;
+            }
+            .btn-control:hover {
+                transform: translateY(-2px);
+            }
+            .btn-refresh {
+                background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            }
+            .btn-newsletter {
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            }
+            .btn-contact {
+                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            }
+            .btn-download {
+                background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            }
+            .status-card {
+                background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+                border: 1px solid #374151;
+                border-radius: 16px;
+                padding: 24px;
+                position: relative;
+                overflow: hidden;
+            }
+            .status-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            }
+            .status-card h4 {
+                margin: 0 0 12px 0;
+                font-size: 1.125rem;
+                font-weight: 600;
+                color: #e5e7eb;
+            }
+            .status-card p {
+                margin: 0;
+                color: #9ca3af;
+                font-size: 0.875rem;
+                line-height: 1.6;
+            }
+            @media (max-width: 768px) {
+                .content {
+                    padding: 24px;
+                }
+                .header {
+                    padding: 32px 24px;
+                }
+                .header h1 {
+                    font-size: 2rem;
+                }
+                .metrics-grid {
+                    grid-template-columns: 1fr;
+                    gap: 24px;
+                }
+                .controls {
+                    grid-template-columns: 1fr;
+                }
+                .metric-card {
+                    padding: 24px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="login-screen" id="loginScreen">
+            <div class="login-card">
+                <h2>LAUNCH HUB Access</h2>
+                <form id="loginForm">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        required
+                    />
+                    <button type="submit" class="btn">
+                        Access Analytics Dashboard
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="dashboard" id="dashboard">
+            <div class="header">
+                <h1>LAUNCH HUB</h1>
+                <p>Personal Analytics Dashboard</p>
+            </div>
+
+            <div class="content">
+                <div class="metrics-grid">
+                    <div class="metric-card blue">
+                        <h3>Newsletter Signups</h3>
+                        <div class="metric-value blue" id="newsletterCount">
+                            1
+                        </div>
+                        <div class="metric-desc">Real subscribers</div>
+                    </div>
+
+                    <div class="metric-card green">
+                        <h3>Contact Forms</h3>
+                        <div class="metric-value green" id="contactCount">
+                            0
+                        </div>
+                        <div class="metric-desc">Customer inquiries</div>
+                    </div>
+
+                    <div class="metric-card orange">
+                        <h3>App Downloads</h3>
+                        <div class="metric-value orange" id="downloadCount">
+                            0
+                        </div>
+                        <div class="metric-desc">Total downloads</div>
+                    </div>
+
+                    <div class="metric-card purple">
+                        <h3>Page Views</h3>
+                        <div class="metric-value purple" id="pageViewCount">
+                            0
+                        </div>
+                        <div class="metric-desc">Total visits</div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button
+                        class="btn-control btn-refresh"
+                        onclick="refreshData()"
+                    >
+                        Refresh Data
+                    </button>
+                    <button
+                        class="btn-control btn-newsletter"
+                        onclick="incrementMetric('newsletter')"
+                    >
+                        +1 Newsletter
+                    </button>
+                    <button
+                        class="btn-control btn-contact"
+                        onclick="incrementMetric('contact')"
+                    >
+                        +1 Contact
+                    </button>
+                    <button
+                        class="btn-control btn-download"
+                        onclick="incrementMetric('download')"
+                    >
+                        +1 Download
+                    </button>
+                </div>
+
+                <div class="status-card">
+                    <h4>Database Status</h4>
+                    <p id="statusText">
+                        Local database active • Last updated:
+                        <span id="lastUpdated">Never</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const STORAGE_KEY = "launchHubData";
+            const AUTH_KEY = "launchHubAuth";
+            const API_BASE = "https://launchfit.app";
+
+            let analyticsData = {
+                newsletter: 1,
+                contact: 0,
+                download: 0,
+                pageView: 0,
+                lastUpdated: Date.now(),
+            };
+
+            function loadData() {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    try {
+                        analyticsData = JSON.parse(stored);
+                    } catch (error) {
+                        console.error("Error loading stored data:", error);
+                    }
+                }
+                updateDisplay();
+            }
+
+            function saveData() {
+                analyticsData.lastUpdated = Date.now();
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(analyticsData),
+                );
+                updateDisplay();
+            }
+
+            function updateDisplay() {
+                document.getElementById("newsletterCount").textContent =
+                    analyticsData.newsletter;
+                document.getElementById("contactCount").textContent =
+                    analyticsData.contact;
+                document.getElementById("downloadCount").textContent =
+                    analyticsData.download;
+                document.getElementById("pageViewCount").textContent =
+                    analyticsData.pageView;
+                document.getElementById("lastUpdated").textContent = new Date(
+                    analyticsData.lastUpdated,
+                ).toLocaleTimeString();
+            }
+
+            function incrementMetric(type) {
+                analyticsData[type]++;
+                saveData();
+                showSyncStatus("Data updated locally");
+            }
+
+            async function refreshData() {
+                showSyncStatus("Syncing with live data...");
+
+                try {
+                    const response = await fetch(
+                        API_BASE + "/api/analytics-data",
+                    );
+                    if (response.ok) {
+                        const liveData = await response.json();
+
+                        analyticsData.newsletter =
+                            liveData.eventCounts?.total?.newsletterSignups ||
+                            analyticsData.newsletter;
+                        analyticsData.contact =
+                            liveData.eventCounts?.total?.contactForms ||
+                            analyticsData.contact;
+                        analyticsData.download =
+                            liveData.eventCounts?.total?.appDownloads ||
+                            analyticsData.download;
+                        analyticsData.pageView =
+                            liveData.eventCounts?.total?.pageViews ||
+                            analyticsData.pageView;
+
+                        saveData();
+                        showSyncStatus("Synced with live data");
+                    } else {
+                        showSyncStatus("Using offline data");
+                    }
+                } catch (error) {
+                    console.error("Sync error:", error);
+                    showSyncStatus("Using offline data");
+                }
+                updateDisplay();
+            }
+
+            function showSyncStatus(message) {
+                const statusElement = document.getElementById("statusText");
+                const originalText = statusElement.innerHTML;
+                statusElement.innerHTML =
+                    message +
+                    ' • Last updated: <span id="lastUpdated">' +
+                    new Date(analyticsData.lastUpdated).toLocaleTimeString() +
+                    "</span>";
+
+                setTimeout(() => {
+                    statusElement.innerHTML = originalText;
+                    document.getElementById("lastUpdated").textContent =
+                        new Date(
+                            analyticsData.lastUpdated,
+                        ).toLocaleTimeString();
+                }, 3000);
+            }
+
+            function checkAuth() {
+                const authToken = sessionStorage.getItem(AUTH_KEY);
+                if (authToken === "authenticated") {
+                    showDashboard();
+                }
+            }
+
+            function showDashboard() {
+                document.getElementById("loginScreen").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+                loadData();
+
+                setInterval(async () => {
+                    if (navigator.onLine) {
+                        await refreshData();
+                    }
+                }, 30000);
+
+                setTimeout(() => {
+                    refreshData();
+                }, 1000);
+            }
+
+            document
+                .getElementById("loginForm")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const password = document.getElementById("password").value;
+
+                    if (password === "LaunchLifestyle2025!") {
+                        sessionStorage.setItem(AUTH_KEY, "authenticated");
+                        showDashboard();
+                    } else {
+                        alert("Incorrect password");
+                        document.getElementById("password").value = "";
+                    }
+                });
+
+            checkAuth();
+
+            if ("serviceWorker" in navigator) {
+                const swCode =
+                    'const CACHE_NAME = "launch-hub-v1"; self.addEventListener("install", (event) => { event.waitUntil(caches.open(CACHE_NAME)); }); self.addEventListener("fetch", (event) => { event.respondWith(fetch(event.request).catch(() => { return new Response("Offline", { status: 200 }); })); });';
+
+                const blob = new Blob([swCode], {
+                    type: "application/javascript",
+                });
+                const swUrl = URL.createObjectURL(blob);
+
+                navigator.serviceWorker
+                    .register(swUrl)
+                    .then(() => console.log("PWA ready"))
+                    .catch(() => console.log("PWA registration failed"));
+            }
+        </script>
+    </body>
+</html>

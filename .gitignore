@@ -1,0 +1,15 @@
+node_modules
+dist
+.DS_Store
+.env
+.env.*
+!.env.example
+.vercel
+server/public
+service-account-key.json
+*.tar.gz
+*.zip
+api/_app.mjs
+secrets/
+data/*.sql
+data/db-backup.sql

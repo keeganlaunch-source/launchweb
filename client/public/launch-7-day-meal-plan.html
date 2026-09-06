@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAUNCH: Your FREE 7-Day Transformation Meal Plan | Coach Keegs</title>
+    <meta name="description" content="The exact nutrition guide that helped 1,000+ people lose 4.5-6.8 kg in their first month. Download your free Launch meal plan now.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #FFD600 0%, #FFA500 100%);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: #000;
+            color: #FFD600;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .header .stats {
+            background: #FFD600;
+            color: #000;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .intro {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 5px solid #FFD600;
+        }
+        
+        .day-section {
+            margin-bottom: 3rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .day-header {
+            background: #000;
+            color: #FFD600;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .day-content {
+            padding: 2rem;
+        }
+        
+        .meal {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #FFD600;
+        }
+        
+        .meal h4 {
+            color: #000;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .meal-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+        
+        .ingredients {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        
+        .nutrition {
+            background: #e8f5e8;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .nutrition h5 {
+            color: #2d5a2d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nutrition-item {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .tips-section {
+            background: #e3f2fd;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .tips h3 {
+            color: #1976d2;
+            margin-bottom: 1rem;
+        }
+        
+        .tip {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #2196f3;
+        }
+        
+        .footer {
+            background: #000;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .cta-section {
+            background: #FFD600;
+            color: #000;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+        
+        .cta-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .cta-button {
+            background: #000;
+            color: #FFD600;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+        
+        .cta-button:hover {
+            background: #333;
+        }
+        
+        ul {
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .meal-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Measurement conversion system based on user location
+        const measurementData = {
+            // Imperial measurements (default)
+            imperial: {
+                spinach: "1 cup spinach",
+                oliveoil: "1 tsp olive oil",
+                mixedgreens: "2 cups mixed greens",
+                cherrytomatoes: "1/2 cup cherry tomatoes",
+                fetacheese: "1/4 cup feta cheese",
+                oliveoilvinaigrette: "2 tbsp olive oil vinaigrette",
+                walnuts: "1/4 cup walnuts",
+                sweetpotato: "1 cup roasted sweet potato cubes",
+                broccoli: "1 cup steamed broccoli",
+                tablespoonoliveoil: "1 tbsp olive oil",
+                greekyogurt: "Greek yogurt (7 oz) with berries",
+                almondbutter: "Apple with 2 tbsp almond butter",
+                mixednuts: "Mixed nuts (1 oz)",
+                rolledoats: "1/2 cup rolled oats",
+                chiaseeds: "1 tbsp chia seeds",
+                hummus: "2 tbsp hummus",
+                teaspoonnutoil: "1 tsp olive oil",
+                tablespoonhummus: "2 tbsp hummus"
+            },
+            // Metric measurements
+            metric: {
+                spinach: "30g fresh spinach",
+                oliveoil: "5ml olive oil",
+                mixedgreens: "60g mixed greens",
+                cherrytomatoes: "80g cherry tomatoes",
+                fetacheese: "30g feta cheese",
+                oliveoilvinaigrette: "30ml olive oil vinaigrette",
+                walnuts: "30g walnuts",
+                sweetpotato: "150g roasted sweet potato cubes",
+                broccoli: "150g steamed broccoli",
+                tablespoonoliveoil: "15ml olive oil",
+                greekyogurt: "Greek yogurt (200g) with berries",
+                almondbutter: "Apple with 30g almond butter",
+                mixednuts: "Mixed nuts (30g)",
+                rolledoats: "40g rolled oats",
+                chiaseeds: "15g chia seeds",
+                hummus: "30g hummus",
+                teaspoonnutoil: "5ml olive oil",
+                tablespoonhummus: "30g hummus"
+            }
+        };
+
+        // Countries that use imperial system
+        const imperialCountries = ['US', 'LR', 'MM'];
+        
+        // Detect user's measurement preference
+        async function detectMeasurementSystem() {
+            try {
+                // Try geolocation first
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                const countryCode = data.country_code;
+                console.log('Country detected:', countryCode);
+                
+                const useImperial = imperialCountries.includes(countryCode);
+                console.log('Use imperial:', useImperial);
+                return useImperial ? 'imperial' : 'metric';
+            } catch (error) {
+                console.log('Geolocation failed, using locale fallback:', error);
+                // Fallback to browser locale detection
+                const locale = navigator.language || navigator.languages[0];
+                const useImperial = locale.startsWith('en-US');
+                console.log('Locale detected:', locale, 'Use imperial:', useImperial);
+                return useImperial ? 'imperial' : 'metric';
+            }
+        }
+
+        // Apply measurements to the page
+        function applyMeasurements(system) {
+            const measurements = measurementData[system];
+            console.log('Applying measurements for system:', system);
+            console.log('Available measurements:', measurements);
+            
+            // Update all measurement elements
+            document.querySelectorAll('[data-measurement]').forEach(element => {
+                const measurementKey = element.getAttribute('data-measurement');
+                console.log('Processing element with key:', measurementKey);
+                if (measurements[measurementKey]) {
+                    element.textContent = measurements[measurementKey];
+                    console.log('Updated to:', measurements[measurementKey]);
+                } else {
+                    console.log('No measurement found for key:', measurementKey);
+                }
+            });
+            
+            // Force metric system for testing
+            if (window.location.hostname === 'localhost') {
+                console.log('Localhost detected, forcing metric system');
+                const metricMeasurements = measurementData.metric;
+                document.querySelectorAll('[data-measurement]').forEach(element => {
+                    const measurementKey = element.getAttribute('data-measurement');
+                    if (metricMeasurements[measurementKey]) {
+                        element.textContent = metricMeasurements[measurementKey];
+                    }
+                });
+            }
+        }
+
+        // Initialize measurement system on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Detecting measurement system...');
+            const system = await detectMeasurementSystem();
+            console.log('Detected system:', system);
+            applyMeasurements(system);
+            
+            // Show debug info in development
+            if (window.location.hostname === 'localhost') {
+                const debugDiv = document.createElement('div');
+                debugDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:red;color:white;padding:10px;z-index:9999;';
+                debugDiv.textContent = `Measurement System: ${system}`;
+                document.body.appendChild(debugDiv);
+            }
+        });
+    </script>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 LAUNCH</h1>
+            <div class="subtitle">Your FREE 7-Day Transformation Meal Plan</div>
+            <div class="stats">
+                ✅ Used by 1,000+ successful transformations<br>
+                ✅ Average 4.5-6.8 kg lost in first month<br>
+                ✅ Zero calorie counting required
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="intro">
+                <h2>🎯 Welcome to Your LAUNCH Transformation</h2>
+                <p><strong>Congratulations!</strong> You've just downloaded the exact nutrition strategy that has helped over 1,000 people kickstart their fitness transformations. This isn't just another meal plan - it's your LAUNCH pad to a healthier, stronger you.</p>
+                
+                <h3 style="margin-top: 1.5rem; color: #FFD600; background: #000; padding: 0.5rem; text-align: center;">🔥 WHY THIS WORKS</h3>
+                <ul>
+                    <li><strong>Metabolic Optimization:</strong> Each meal is designed to boost your metabolism</li>
+                    <li><strong>Sustainable Portions:</strong> You'll feel satisfied, never starved</li>
+                    <li><strong>Real Food Focus:</strong> No expensive supplements or exotic ingredients</li>
+                    <li><strong>Proven Results:</strong> Based on successful transformations from real people</li>
+                </ul>
+            </div>
+
+            <!-- DAY 1 -->
+            <div class="day-section">
+                <div class="day-header">🚀 Day 1: Launch Day</div>
+                <div class="day-content">
+                    <div class="meal">
+                        <h4>🌅 Breakfast: Power Launch Scramble</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>3 whole eggs</li>
+                                    <li><span data-measurement="spinach">1 cup spinach</span></li>
+                                    <li>1/2 avocado, sliced</li>
+                                    <li>1 slice whole grain toast</li>
+                                    <li><span data-measurement="oliveoil">1 tsp olive oil</span></li>
+                                </ul>
+                                <strong>Prep:</strong> Scramble eggs with spinach in olive oil. Serve with avocado and toast.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 420</div>
+                                <div class="nutrition-item">Protein: 22g</div>
+                                <div class="nutrition-item">Carbs: 25g</div>
+                                <div class="nutrition-item">Fat: 28g</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🥪 Lunch: Rocket Fuel Salad</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>150g grilled chicken breast</li>
+                                    <li><span data-measurement="mixedgreens">2 cups mixed greens</span></li>
+                                    <li><span data-measurement="cherrytomatoes">1/2 cup cherry tomatoes</span></li>
+                                    <li><span data-measurement="fetacheese">1/4 cup feta cheese</span></li>
+                                    <li><span data-measurement="oliveoilvinaigrette">2 tbsp olive oil vinaigrette</span></li>
+                                    <li><span data-measurement="walnuts">1/4 cup walnuts</span></li>
+                                </ul>
+                                <strong>Prep:</strong> Combine all ingredients. Toss with vinaigrette.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 485</div>
+                                <div class="nutrition-item">Protein: 35g</div>
+                                <div class="nutrition-item">Carbs: 12g</div>
+                                <div class="nutrition-item">Fat: 35g</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🍽️ Dinner: Mission Complete Bowl</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>150g salmon fillet</li>
+                                    <li><span data-measurement="sweetpotato">1 cup roasted sweet potato cubes</span></li>
+                                    <li><span data-measurement="broccoli">1 cup steamed broccoli</span></li>
+                                    <li><span data-measurement="tablespoonoliveoil">1 tbsp olive oil</span></li>
+                                    <li>Lemon, herbs, garlic for seasoning</li>
+                                </ul>
+                                <strong>Prep:</strong> Bake salmon with lemon and herbs. Roast sweet potato. Steam broccoli.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 520</div>
+                                <div class="nutrition-item">Protein: 35g</div>
+                                <div class="nutrition-item">Carbs: 35g</div>
+                                <div class="nutrition-item">Fat: 25g</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🥜 Snacks: Fuel Stations (Choose 1-2)</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Options:</strong>
+                                <ul>
+                                    <li><span data-measurement="greekyogurt">Greek yogurt (7 oz) with berries</span></li>
+                                    <li><span data-measurement="almondbutter">Apple with 2 tbsp almond butter</span></li>
+                                    <li>Protein smoothie (protein powder + banana + spinach)</li>
+                                    <li><span data-measurement="mixednuts">Mixed nuts (1 oz)</span></li>
+                                </ul>
+                            </div>
+                            <div class="nutrition">
+                                <h5>Per Snack</h5>
+                                <div class="nutrition-item">Calories: 150-200</div>
+                                <div class="nutrition-item">Protein: 8-15g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 2 -->
+            <div class="day-section">
+                <div class="day-header">💪 Day 2: Momentum Builder</div>
+                <div class="day-content">
+                    <div class="meal">
+                        <h4>🌅 Breakfast: Champion's Oats</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li><span data-measurement="rolledoats">1/2 cup rolled oats</span></li>
+                                    <li>1 scoop protein powder</li>
+                                    <li><span data-measurement="almondbutter">1 tbsp almond butter</span></li>
+                                    <li>1/2 banana, sliced</li>
+                                    <li><span data-measurement="chiaseeds">1 tbsp chia seeds</span></li>
+                                    <li>Cinnamon to taste</li>
+                                </ul>
+                                <strong>Prep:</strong> Cook oats, stir in protein powder and almond butter. Top with banana, chia seeds, and cinnamon.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 445</div>
+                                <div class="nutrition-item">Protein: 28g</div>
+                                <div class="nutrition-item">Carbs: 42g</div>
+                                <div class="nutrition-item">Fat: 18g</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🥪 Lunch: Power Wrap</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>1 large whole wheat tortilla</li>
+                                    <li>120g sliced turkey breast</li>
+                                    <li><span data-measurement="hummus">2 tbsp hummus</span></li>
+                                    <li>Lettuce, tomato, cucumber</li>
+                                    <li>1/4 avocado</li>
+                                    <li>Handful of sprouts</li>
+                                </ul>
+                                <strong>Prep:</strong> Spread hummus on tortilla, add turkey and vegetables, roll tightly.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 420</div>
+                                <div class="nutrition-item">Protein: 32g</div>
+                                <div class="nutrition-item">Carbs: 35g</div>
+                                <div class="nutrition-item">Fat: 18g</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🍽️ Dinner: Victory Stir-Fry</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>150g lean beef strips</li>
+                                    <li>2 cups mixed vegetables (bell peppers, snap peas, carrots)</li>
+                                    <li>1/2 cup brown rice</li>
+                                    <li>1 tbsp sesame oil</li>
+                                    <li>2 tbsp low-sodium soy sauce</li>
+                                    <li>Fresh ginger and garlic</li>
+                                </ul>
+                                <strong>Prep:</strong> Stir-fry beef and vegetables in sesame oil. Season with soy sauce, ginger, and garlic. Serve over brown rice.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 495</div>
+                                <div class="nutrition-item">Protein: 32g</div>
+                                <div class="nutrition-item">Carbs: 45g</div>
+                                <div class="nutrition-item">Fat: 20g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 3 -->
+            <div class="day-section">
+                <div class="day-header">🔥 Day 3: Fat Burn Focus</div>
+                <div class="day-content">
+                    <div class="meal">
+                        <h4>🌅 Breakfast: Metabolism Booster Smoothie</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>1 scoop vanilla protein powder</li>
+                                    <li>1 cup unsweetened almond milk</li>
+                                    <li>1/2 cup frozen berries</li>
+                                    <li>1 tbsp ground flaxseed</li>
+                                    <li>Handful of spinach</li>
+                                    <li>Ice cubes</li>
+                                </ul>
+                                <strong>Prep:</strong> Blend all ingredients until smooth.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 285</div>
+                                <div class="nutrition-item">Protein: 25g</div>
+                                <div class="nutrition-item">Carbs: 18g</div>
+                                <div class="nutrition-item">Fat: 12g</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🥪 Lunch: Lean Machine Salad</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>150g grilled white fish (cod or tilapia)</li>
+                                    <li>3 cups arugula and spinach mix</li>
+                                    <li>1/2 cup quinoa (cooked)</li>
+                                    <li>1/4 cup chickpeas</li>
+                                    <li>1 tbsp olive oil and lemon dressing</li>
+                                    <li>Fresh herbs (parsley, dill)</li>
+                                </ul>
+                                <strong>Prep:</strong> Combine all ingredients, drizzle with dressing.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 385</div>
+                                <div class="nutrition-item">Protein: 35g</div>
+                                <div class="nutrition-item">Carbs: 35g</div>
+                                <div class="nutrition-item">Fat: 12g</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🍽️ Dinner: Clean Burn Plate</h4>
+                        <div class="meal-details">
+                            <div class="ingredients">
+                                <strong>Ingredients:</strong>
+                                <ul>
+                                    <li>150g grilled chicken thigh (skinless)</li>
+                                    <li>200g roasted cauliflower</li>
+                                    <li>1 cup zucchini noodles</li>
+                                    <li>2 tbsp pesto sauce</li>
+                                    <li>Cherry tomatoes for garnish</li>
+                                </ul>
+                                <strong>Prep:</strong> Grill chicken, roast cauliflower, spiralize zucchini, toss with pesto.
+                            </div>
+                            <div class="nutrition">
+                                <h5>Nutrition</h5>
+                                <div class="nutrition-item">Calories: 420</div>
+                                <div class="nutrition-item">Protein: 35g</div>
+                                <div class="nutrition-item">Carbs: 15g</div>
+                                <div class="nutrition-item">Fat: 25g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAYS 4-7 OVERVIEW -->
+            <div class="day-section">
+                <div class="day-header">📅 Days 4-7: Complete Your Launch</div>
+                <div class="day-content">
+                    <p><strong>Days 4-7 follow the same proven formula with exciting variations:</strong></p>
+                    
+                    <div class="meal">
+                        <h4>🎯 Day 4: Strength Building</h4>
+                        <div class="ingredients">
+                            <strong>Focus:</strong> Higher protein meals to support muscle development
+                            <ul>
+                                <li><strong>Breakfast:</strong> Greek yogurt parfait with nuts and seeds</li>
+                                <li><strong>Lunch:</strong> Lentil and vegetable soup with whole grain roll</li>
+                                <li><strong>Dinner:</strong> Baked cod with roasted root vegetables</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>💚 Day 5: Green Power</h4>
+                        <div class="ingredients">
+                            <strong>Focus:</strong> Nutrient-dense greens and detoxifying foods
+                            <ul>
+                                <li><strong>Breakfast:</strong> Green smoothie bowl with toppings</li>
+                                <li><strong>Lunch:</strong> Quinoa Buddha bowl with tahini dressing</li>
+                                <li><strong>Dinner:</strong> Herb-crusted salmon with asparagus</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>⚡ Day 6: Energy Optimization</h4>
+                        <div class="ingredients">
+                            <strong>Focus:</strong> Complex carbs for sustained energy
+                            <ul>
+                                <li><strong>Breakfast:</strong> Sweet potato hash with eggs</li>
+                                <li><strong>Lunch:</strong> Mediterranean quinoa salad</li>
+                                <li><strong>Dinner:</strong> Lean beef with roasted vegetables</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="meal">
+                        <h4>🎉 Day 7: Celebration & Reset</h4>
+                        <div class="ingredients">
+                            <strong>Focus:</strong> Balanced celebration meal while staying on track
+                            <ul>
+                                <li><strong>Breakfast:</strong> Weekend warrior pancakes (healthy version)</li>
+                                <li><strong>Lunch:</strong> Fresh poke bowl</li>
+                                <li><strong>Dinner:</strong> Celebration meal of your choice (portion-controlled)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h3>🎯 LAUNCH Success Tips</h3>
+                
+                <div class="tip">
+                    <strong>💧 Hydration Protocol:</strong> Drink 500ml water upon waking, then 250ml before each meal. Aim for clear/light yellow urine.
+                </div>
+                
+                <div class="tip">
+                    <strong>⏰ Timing Strategy:</strong> Eat every 3-4 hours. Never skip breakfast. Stop eating 3 hours before bed.
+                </div>
+                
+                <div class="tip">
+                    <strong>🥘 Meal Prep Magic:</strong> Sunday prep saves the week. Cook proteins in bulk, pre-cut vegetables, portion snacks.
+                </div>
+                
+                <div class="tip">
+                    <strong>📏 Portion Guide:</strong> Palm-sized protein, fist-sized vegetables, cupped-hand carbs, thumb-sized fats.
+                </div>
+                
+                <div class="tip">
+                    <strong>🔄 Substitution Rules:</strong> Can't find an ingredient? Swap similar proteins, any green vegetable works, choose complex carbs over simple.
+                </div>
+                
+                <div class="tip">
+                    <strong>📱 Track Progress:</strong> Take progress photos, measure waist circumference, note energy levels daily.
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3>🚀 Ready to LAUNCH Your Complete Transformation?</h3>
+                <p>This meal plan is just the beginning. Get the complete Launch system with:</p>
+                <ul style="text-align: left; max-width: 400px; margin: 1rem auto;">
+                    <li>✅ 30-day workout programs</li>
+                    <li>✅ Video cooking tutorials</li>
+                    <li>✅ Private community support</li>
+                    <li>✅ Weekly live coaching calls</li>
+                    <li>✅ Progress tracking tools</li>
+                </ul>
+                <a href="/#pricing" class="cta-button">Start Your Full Transformation</a>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Join 1,247+ people who've already launched their best bodies</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>🎯 Your Launch Success Checklist</h3>
+            <p>□ Download this meal plan ✅<br>
+            □ Plan your grocery shopping<br>
+            □ Prep Day 1 breakfast tonight<br>
+            □ Set phone reminders for meal times<br>
+            □ Take your starting measurements<br>
+            □ Join our Launch community for support</p>
+            
+            <div style="margin-top: 2rem; border-top: 1px solid #333; padding-top: 1rem;">
+                <p><strong>Coach Keegs | Launch Fitness Transformation</strong><br>
+                Transform your body. Transform your life. Launch your best self.</p>
+                <p style="font-size: 0.8rem; margin-top: 1rem;">
+                    © 2024 Coach Keegs Fitness. This meal plan is for educational purposes. Consult your healthcare provider before starting any nutrition program.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
