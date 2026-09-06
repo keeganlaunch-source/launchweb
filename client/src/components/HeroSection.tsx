@@ -38,7 +38,7 @@ export default function HeroSection() {
 
   return (
     <section id="hero" className="min-h-screen flex items-center px-6 lg:px-12 pt-32 pb-20 bg-background relative">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center w-full">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start w-full">
         {/* Hero Content */}
         <div className="space-y-8 animate-slide-in">
           <div className="inline-flex items-center gap-2 border border-primary/30 px-4 py-2">
@@ -49,13 +49,11 @@ export default function HeroSection() {
           </div>
 
           <h1 className="font-heading text-6xl lg:text-8xl leading-[0.95] uppercase">
-            Get Fit At Home In{" "}
-            <span className="text-primary">30 Days</span>{" "}
-            Or Your Money Back
+            Building <span className="text-primary">Better</span> Humans
           </h1>
 
           <p className="text-lg lg:text-xl text-muted-foreground max-w-md animate-slide-in-delay">
-            Zero gym required. Personalized coaching, built around your life.
+            Personal training, group coaching and specialist support in Ballito — plus a training app that goes with you anywhere.
           </p>
 
           {/* Hero Feature List */}
@@ -99,7 +97,7 @@ export default function HeroSection() {
             <img
               src={coachHeroImage}
               alt="Coach Keegan, founder of Launch Lifestyle"
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover object-top grayscale"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
           </div>
