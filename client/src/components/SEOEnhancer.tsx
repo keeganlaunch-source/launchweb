@@ -68,17 +68,17 @@ export default function SEOEnhancer() {
 
     // Update meta tags for better SEO
     const updateMetaTags = () => {
-      document.title = "Launch Lifestyle | Personal Training & Coaching, Ballito | Coach Keegs";
+      document.title = "Launch Lifestyle | Personal Training, Ballito";
 
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
-        metaDescription.setAttribute('content', 'Personal training, group classes, youth and neurodiverse specialist coaching in Ballito, plus the Launch Lifestyle app. Building Better Humans since 2017.');
+        metaDescription.setAttribute('content', 'Personal training, group classes and coaching in Ballito, South Africa, plus a global training app. Building Better Humans.');
       }
 
       const ogTags = [
-        { property: 'og:title', content: 'Launch Lifestyle | Personal Training & Coaching, Ballito' },
-        { property: 'og:description', content: 'Personal training, group classes, youth and neurodiverse specialist coaching in Ballito, plus a global training app.' },
-        { property: 'og:image', content: 'https://launchfit.app/og-image.jpg' },
+        { property: 'og:title', content: 'Launch Lifestyle | Personal Training, Ballito' },
+        { property: 'og:description', content: 'Personal training, group classes and coaching in Ballito, South Africa, plus a global training app.' },
+        { property: 'og:image', content: 'https://launchfit.app/launch-lifestyle-brand-og.png' },
         { property: 'og:url', content: 'https://launchfit.app' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Launch Lifestyle' }
@@ -86,9 +86,9 @@ export default function SEOEnhancer() {
 
       const twitterTags = [
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Launch Lifestyle | Personal Training & Coaching, Ballito' },
-        { name: 'twitter:description', content: 'Personal training, group classes, youth and neurodiverse specialist coaching in Ballito, plus a global training app.' },
-        { name: 'twitter:image', content: 'https://launchfit.app/og-image.jpg' }
+        { name: 'twitter:title', content: 'Launch Lifestyle | Personal Training, Ballito' },
+        { name: 'twitter:description', content: 'Personal training, group classes and coaching in Ballito, South Africa, plus a global training app.' },
+        { name: 'twitter:image', content: 'https://launchfit.app/launch-lifestyle-brand-og.png' }
       ];
 
       [...ogTags, ...twitterTags].forEach(tag => {
