@@ -10,7 +10,6 @@ import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import { LeadMagnets } from "@/components/LeadMagnets";
 import { TrustSignals } from "@/components/TrustSignals";
 import FreeTrialSection from "@/components/FreeTrialSection";
-import DigitalProductsSection from "@/components/DigitalProductsSection";
 import FloatingCTA from "@/components/FloatingCTA";
 import SEOEnhancer from "@/components/SEOEnhancer";
 import ExitIntentModal from "@/components/ExitIntentModal";
@@ -78,9 +77,6 @@ export default function Home() {
       
       {/* Key Features */}
       <FeaturesSection />
-      
-      {/* Digital Products - Cookbook and Lifestyle Blueprint */}
-      <DigitalProductsSection />
       
       {/* Lead magnets lower down */}
       <LeadMagnets onEmailCapture={handleEmailCapture} />
