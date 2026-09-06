@@ -13,6 +13,9 @@ export default function ServiceSections() {
         >
           <div className="max-w-4xl mx-auto grid lg:grid-cols-5 gap-10 items-start">
             <div className="lg:col-span-3 space-y-4">
+              <div className="w-14 h-14 flex items-center justify-center border border-primary/30">
+                <service.icon className="w-6 h-6 text-primary" />
+              </div>
               <h2 className="font-heading text-4xl lg:text-5xl uppercase tracking-tight">
                 {service.title}
               </h2>

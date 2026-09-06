@@ -21,21 +21,27 @@ export default function ServicesOverview() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {allServices.map((service) => (
-            <button
-              key={service.id}
-              onClick={() => scrollTo(service.id)}
-              className="group text-left bg-card border border-border p-6 hover:border-primary/50 transition-colors"
-            >
-              <h3 className="font-heading text-2xl uppercase tracking-wide mb-2 group-hover:text-primary transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">{service.summary}</p>
-              <span className="inline-flex items-center gap-1 text-xs uppercase tracking-widest text-primary font-medium">
-                Details <ArrowRight className="w-3 h-3" />
-              </span>
-            </button>
-          ))}
+          {allServices.map((service) => {
+            const Icon = service.icon;
+            return (
+              <button
+                key={service.id}
+                onClick={() => scrollTo(service.id)}
+                className="group text-left bg-card border border-border p-6 hover:border-primary/50 transition-colors"
+              >
+                <div className="w-11 h-11 flex items-center justify-center border border-primary/30 mb-4 group-hover:border-primary transition-colors">
+                  <Icon className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="font-heading text-2xl uppercase tracking-wide mb-2 group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">{service.summary}</p>
+                <span className="inline-flex items-center gap-1 text-xs uppercase tracking-widest text-primary font-medium">
+                  Details <ArrowRight className="w-3 h-3" />
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>
