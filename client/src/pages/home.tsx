@@ -5,7 +5,6 @@ import FeaturesSection from "@/components/FeaturesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
-import LaunchAI from "@/components/LaunchAI";
 import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import { LeadMagnets } from "@/components/LeadMagnets";
 import { TrustSignals } from "@/components/TrustSignals";
@@ -80,10 +79,7 @@ export default function Home() {
       
       {/* Lead magnets lower down */}
       <LeadMagnets onEmailCapture={handleEmailCapture} />
-      
-      {/* Have Questions - moved lower as requested */}
-      <LaunchAI />
-      
+
       {/* Newsletter signup */}
       <NewsletterSection />
       

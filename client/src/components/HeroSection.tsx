@@ -101,24 +101,6 @@ export default function HeroSection() {
             ))}
           </div>
 
-          {/* Launch AI Quick Questions */}
-          <div className="bg-black p-5 rounded-xl space-y-4 animate-slide-in-delay-2">
-            <div className="flex items-center gap-2">
-              <p className="font-grunge text-lg font-black uppercase text-white tracking-wide">Have Questions?</p>
-            </div>
-            <p className="text-primary text-sm font-medium">Get instant answers about fitness, nutrition, workouts, and health goals</p>
-            <button
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent('openLaunchAI', { 
-                  detail: { question: "I have a fitness question" } 
-                }));
-              }}
-              className="w-full p-4 bg-primary text-black hover:bg-primary/90 rounded-xl transition-all duration-200 hover:scale-105 text-lg font-bold"
-            >
-              Ask Launch AI
-            </button>
-          </div>
-
           {/* Hero CTA - Optimized for higher conversion */}
           <div className="space-y-4 pt-6 animate-slide-in-delay-3">
             {/* Primary CTA with urgency */}

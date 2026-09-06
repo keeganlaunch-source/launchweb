@@ -13,7 +13,6 @@ import { initRealTimeAnalytics } from "./lib/real-time-analytics";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 import Home from "@/pages/home";
-import LaunchAIPage from "@/pages/launch-ai";
 import NotFound from "@/pages/not-found";
 import EmailPreview from "@/pages/email-preview";
 import EmailDashboard from "@/pages/email-dashboard";
@@ -49,7 +48,6 @@ function Router() {
       <Route path="/start-premium" component={SignupRedirect} />
       <Route path="/start-free-trial" component={SignupRedirect} />
       <Route path="/launch-analytics-hub" component={LaunchAnalyticsHub} />
-      <Route path="/launch-ai" component={LaunchAIPage} />
       <Route path="/products" component={Products} />
 
       <Route path="/success" component={Success} />
