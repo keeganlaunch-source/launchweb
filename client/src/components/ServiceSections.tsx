@@ -4,36 +4,35 @@ import { MessageCircle, Mail, Clock } from "lucide-react";
 
 export default function ServiceSections() {
   return (
-    <>
-      {services.map((service, index) => (
-        <section
-          key={service.id}
-          id={service.id}
-          className={`py-20 px-6 lg:px-12 ${index % 2 === 0 ? 'bg-background' : 'bg-card'}`}
-        >
-          <div className="max-w-4xl mx-auto grid lg:grid-cols-5 gap-10 items-start">
-            <div className="lg:col-span-3 space-y-4">
-              <div className="w-14 h-14 flex items-center justify-center border border-primary/30">
-                <service.icon className="w-6 h-6 text-primary" />
-              </div>
-              <h2 className="font-heading text-4xl lg:text-5xl uppercase tracking-tight">
-                {service.title}
-              </h2>
-              <p className="text-lg text-foreground/85 leading-relaxed">
-                {service.description}
-              </p>
-              {service.schedule && (
-                <div className="flex items-center gap-2 text-sm text-muted-foreground pt-1">
-                  <Clock className="w-4 h-4 text-primary" />
-                  {service.schedule}
-                </div>
-              )}
+    <section className="py-24 px-6 lg:px-12 bg-background">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+        {services.map((service) => (
+          <div
+            key={service.id}
+            id={service.id}
+            className="bg-card border border-border p-8 flex flex-col"
+          >
+            <div className="w-14 h-14 flex items-center justify-center border border-primary/30 mb-5">
+              <service.icon className="w-6 h-6 text-primary" />
             </div>
 
-            <div className="lg:col-span-2 border border-border p-6 space-y-4">
+            <h2 className="font-heading text-3xl lg:text-4xl uppercase tracking-tight mb-3">
+              {service.title}
+            </h2>
+            <p className="text-base text-foreground/85 leading-relaxed mb-4">
+              {service.description}
+            </p>
+            {service.schedule && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                <Clock className="w-4 h-4 text-primary shrink-0" />
+                {service.schedule}
+              </div>
+            )}
+
+            <div className="mt-auto pt-4 border-t border-border space-y-4">
               <div className="space-y-1">
                 {service.pricing.map((line, i) => (
-                  <p key={i} className="font-heading text-2xl uppercase tracking-wide text-primary">
+                  <p key={i} className="font-heading text-xl uppercase tracking-wide text-primary">
                     {line}
                   </p>
                 ))}
@@ -42,7 +41,7 @@ export default function ServiceSections() {
                 )}
               </div>
 
-              <div className="space-y-2 pt-2">
+              <div className="space-y-2">
                 <a
                   href={enquiryWhatsappLink(service.title)}
                   target="_blank"
@@ -62,8 +61,8 @@ export default function ServiceSections() {
               </div>
             </div>
           </div>
-        </section>
-      ))}
-    </>
+        ))}
+      </div>
+    </section>
   );
 }
