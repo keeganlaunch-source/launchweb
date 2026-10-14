@@ -114,6 +114,66 @@ const testimonials = [
   {
     content: "Keegan is brilliant. I stopped by for 2 sessions during my holiday and loved it.",
     author: { name: "Christie Cares", detail: "Google Review" }
+  },
+  {
+    content: "Keegan saved my life....simple",
+    author: { name: "Andy Shuter - Frontline Solutions", detail: "Google Review" }
+  },
+  {
+    content: "Keegan is an awesome coach and he motivates his clients to achieve success!",
+    author: { name: "Nathan Ince", detail: "Google Review" }
+  },
+  {
+    content: "Amazing! Not just for adults - Keegan is amazing with children's fitness! Highly recommended!",
+    author: { name: "Hannah-Rae Bishop", detail: "Google Review" }
+  },
+  {
+    content: "Brilliant at it all - nutrition, lifestyle, fitness, and overall a respectful and inspiring person!!!",
+    author: { name: "Paige Harwood", detail: "Google Review" }
+  },
+  {
+    content: "I appreciate Launch Fitness' emphasis on practical results and personalised training plans that address my specific goals and which are based on my fitness level.",
+    author: { name: "De Villiers Gouws", detail: "Google Review" }
+  },
+  {
+    content: "Absolutely amazing coach. Definitely 100% recommend. Patient and understanding, especially with \"newbies\".",
+    author: { name: "Carol-Anne Moore", detail: "Google Review" }
+  },
+  {
+    content: "Always making it happen — launching it another level. Whether you're a beginner or an elite athlete Launch is the way to go! Thanks Keegan.",
+    author: { name: "Jade Narainasamy", detail: "Google Review" }
+  },
+  {
+    content: "My son's trained with Launch. Nothing but happy stories after their sessions.",
+    author: { name: "Chantelle Nicholson", detail: "Google Review" }
+  },
+  {
+    content: "Dedicated personal trainer! That listens to your needs - and great with motivating teenagers to get fit and healthy!",
+    author: { name: "Monique de Jager", detail: "Google Review" }
+  },
+  {
+    content: "Very good workouts, great energy.",
+    author: { name: "Collisheen Estate", detail: "Google Review" }
+  },
+  {
+    content: "Definitely recommended. Persistence on steroids.",
+    author: { name: "Sweet Aroma", detail: "Google Review" }
+  },
+  {
+    content: "Exceptionally helpful app!",
+    author: { name: "Nick Leitch", detail: "Google Review" }
+  },
+  {
+    content: "Keegan has surely added years to my life... Have been dealing with the difficult situation of a back op, with the only person to reach out to at the 6 week mark, Keegan. Many weeks now, post op, I am looking forward to every workout. It's a mindset! It's tough but just do it!",
+    author: { name: "Sigrid", detail: "Google Review" }
+  },
+  {
+    content: "The training provided by Keegan is superb! Outdoor overall body workout classes in a beautiful setting that is excellent for body and soul. I love that the classes are early so one can get it out of the way and get on with the day. Love the workouts that vary all the time and keeps me coming back for more.",
+    author: { name: "Monique Bradbrooke", detail: "Google Review" }
+  },
+  {
+    content: "Excellent workouts. I'm 66 years old and do three sessions a week with Keegan. The variety of movement and intensity is perfect. Keegan is fun and unrelentingly committed. His thorough approach provides results. Thank you.",
+    author: { name: "DME", detail: "Google Review" }
   }
 ];
 
